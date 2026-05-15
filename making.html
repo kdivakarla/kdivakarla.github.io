@@ -102,13 +102,50 @@
       font-size: 0.82rem; color: var(--purple); font-style: italic;
     }
 
-    /* Two-photo card layout */
-    .card-img-pair {
-      display: grid; grid-template-columns: 1fr 1fr;
+    /* CARD */
+    .card {
+      background: var(--white); border: 1px solid var(--purple-pale);
+      border-radius: 6px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .card-img-pair img {
-      width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 42px rgba(120,70,180,0.1); }
+
+    /* Clickable hero image wrapper */
+    .card-img-wrap {
+      position: relative; cursor: pointer; overflow: hidden;
     }
+    .card-img-wrap img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+      transition: transform 0.35s ease;
+    }
+    .card-img-wrap:hover img { transform: scale(1.04); }
+
+    /* Photo count badge */
+    .photo-count {
+      position: absolute; bottom: 0.7rem; right: 0.7rem;
+      background: rgba(28,18,38,0.72); backdrop-filter: blur(4px);
+      color: rgba(255,254,249,0.9);
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+      pointer-events: none;
+    }
+
+    /* Expand hint on hover */
+    .expand-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(74,42,122,0); transition: background 0.25s;
+    }
+    .card-img-wrap:hover .expand-hint { background: rgba(74,42,122,0.25); }
+    .expand-hint span {
+      opacity: 0; transform: scale(0.8);
+      transition: opacity 0.2s, transform 0.2s;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--white); background: rgba(74,42,122,0.75);
+      padding: 0.45rem 1.1rem; border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+    .card-img-wrap:hover .expand-hint span { opacity: 1; transform: scale(1); }
 
     .card-body { padding: 1.3rem 1.4rem 1.6rem; }
     .card-category {
@@ -118,12 +155,72 @@
     }
     .cat-pack { background: var(--purple-pale); color: var(--purple-dark); }
     .cat-quilt { background: #EBF4E8; color: #3D7A2A; }
-    .cat-bag { background: var(--yellow-pale, #FDF6DC); color: #9A5A00; }
+    .cat-bag { background: #FDF6DC; color: #9A5A00; }
     .cat-gaiter { background: #FDE8F0; color: #A03060; }
-    .cat-batch { background: #E8F4FB; color: #1A6090; }
 
     .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.3; }
     .card-body p { font-size: 0.88rem; font-weight: 300; line-height: 1.65; color: var(--text-light); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(15,8,28,0.95); backdrop-filter: blur(6px);
+      flex-direction: column; align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+
+    .lb-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,254,249,0.6); font-size: 2rem; line-height: 1;
+      transition: color 0.2s;
+    }
+    .lb-close:hover { color: var(--white); }
+
+    .lb-img-wrap {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 4rem 6rem 1rem; width: 100%; max-height: calc(100vh - 160px);
+    }
+    #lb-img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain; border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    #lb-img.fading { opacity: 0; }
+
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,254,249,0.08); border: 1px solid rgba(255,254,249,0.15);
+      color: var(--white); font-size: 1.4rem;
+      width: 3rem; height: 3rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s; user-select: none;
+    }
+    .lb-nav:hover { background: rgba(166,125,212,0.35); }
+    #lb-prev { left: 1.2rem; }
+    #lb-next { right: 1.2rem; }
+    .lb-nav.hidden { opacity: 0; pointer-events: none; }
+
+    .lb-bottom {
+      padding: 0.8rem 2rem 1.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+      width: 100%;
+    }
+    .lb-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .lb-caption { font-size: 0.82rem; font-weight: 300; color: rgba(255,254,249,0.5); }
+
+    /* Thumbnail strip */
+    .lb-thumbs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+      max-width: 600px;
+    }
+    .lb-thumb {
+      width: 52px; height: 52px; object-fit: cover; border-radius: 3px;
+      cursor: pointer; opacity: 0.45; transition: opacity 0.2s, outline 0.15s;
+      outline: 2px solid transparent;
+    }
+    .lb-thumb.active { opacity: 1; outline: 2px solid var(--purple); }
+    .lb-thumb:hover { opacity: 0.85; }
 
     /* ABOUT ARAM SE */
     .about-section {
@@ -173,7 +270,7 @@
     <p>Handmade ultralight outdoor equipment sewn from technical fabrics — backpacks, sleeping quilts, handlebar bags, gaiters, and more. Each piece is designed for the trail and made by hand.</p>
   </div>
   <div class="logo-area">
-    <img src="logo.png" alt="Aram Se logo" />
+    <img src="objects/aramse/logo.png" alt="Aram Se logo" />
   </div>
 </section>
 
@@ -181,25 +278,33 @@
   <span class="filter-label">Filter:</span>
   <button class="filter-btn active" onclick="filter('all', this)">All</button>
   <button class="filter-btn" onclick="filter('pack', this)">Packs</button>
-  <button class="filter-btn" onclick="filter('quilt', this)">Quilts & Bags</button>
+  <button class="filter-btn" onclick="filter('quilt', this)">Quilts</button>
   <button class="filter-btn" onclick="filter('bag', this)">Bike Bags</button>
-  <button class="filter-btn" onclick="filter('gaiter', this)">Gaiters</button>
-  <button class="filter-btn" onclick="filter('batch', this)">Batch Work</button>
+  <button class="filter-btn" onclick="filter('misc', this)">Misc</button>
 </div>
 
 <section class="projects">
   <div class="grid" id="grid">
 
     <!-- Purple ultralight pack -->
-    <article class="card fade-up" data-cat="pack">
-      <div class="card-img-pair">
-        <img src="pack-purple-front.jpg" alt="Purple ultralight backpack — front view" />
-        <img src="pack-purple-side.jpg" alt="Purple ultralight backpack — side view" />
+    <article class="card fade-up" data-cat="pack"
+      data-title="Trail Running Pack"
+      data-images="objects/aramse/trailrunningpack/packoblique.jpeg|
+      objects/aramse/trailrunningpack/packbackwearing.jpg|
+      objects/aramse/trailrunningpack/packfront.jpeg|
+      objects/aramse/trailrunningpack/packobliquewearing.jpeg|
+      objects/aramse/trailrunningpack/packside.jpeg|
+      objects/aramse/trailrunningpack/packsidewearing.jpeg"
+      data-captions="Front view — lilac Dyneema body with grey mesh pocket and yellow hip belt|Side view — roll-top closure with side compression straps">
+      <div class="card-img-wrap" onclick="openLightbox(this.closest('.card'))">
+        <img src="objects/aramse/trailrunningpack/packoblique.jpeg" alt="Trail Running Pack" />
+        <div class="expand-hint"><span>View all photos</span></div>
+        <span class="photo-count">6 photos</span>
       </div>
       <div class="card-body">
         <span class="card-category cat-pack">Pack</span>
-        <h3>Purple Ultralight Frameless Pack</h3>
-        <p>Dyneema Composite Fabric main body in lilac with yellow Dyneema hip pockets and grey mesh front pocket. Roll-top closure with side compression. Built for long-distance trails.</p>
+        <h3>Trail Runnning Pack</h3>
+        <p> Ultra 400 pack with running vest straps. Built for active movement through changing mountain environments.</p>
       </div>
     </article>
 
@@ -216,25 +321,6 @@
       </div>
     </article>
 
-    <!-- Handlebar bag on bike -->
-    <article class="card fade-up" data-cat="bag">
-      <img class="card-img" src="handlebar-bag.jpg" alt="Red and yellow handlebar bag mounted on mountain bike" />
-      <div class="card-body">
-        <span class="card-category cat-bag">Bike Bag</span>
-        <h3>Handlebar Roll Bag</h3>
-        <p>Red X-Pac main body with yellow Dyneema roll-top, zippered front pocket, and dual bar mounts. Photographed in action on Colorado trails.</p>
-      </div>
-    </article>
-
-    <!-- Open bags at sewing machine -->
-    <article class="card fade-up" data-cat="bag">
-      <img class="card-img" src="bags-open.jpg" alt="Three red and yellow handlebar bags open at sewing machine" />
-      <div class="card-body">
-        <span class="card-category cat-bag">Bike Bag</span>
-        <h3>Handlebar Bags — In Progress</h3>
-        <p>Three bags in production simultaneously. Yellow Dyneema roll-top and red X-Pac body — open here showing the structured interior and clean seam finishing.</p>
-      </div>
-    </article>
 
     <!-- White CS Mines pack front + side -->
     <article class="card fade-up" data-cat="pack">
@@ -246,36 +332,6 @@
         <span class="card-category cat-pack">Pack — Commission</span>
         <h3>Colorado School of Mines Pack</h3>
         <p>White Dyneema CF body with navy webbing, red accent pockets, and a custom embroidered Outdoor Recreation Center patch. Commissioned ultralight alpine pack.</p>
-      </div>
-    </article>
-
-    <!-- Pack worn -->
-    <article class="card fade-up" data-cat="pack">
-      <img class="card-img" src="pack-worn.jpg" alt="White Dyneema pack worn on back outdoors" />
-      <div class="card-body">
-        <span class="card-category cat-pack">Pack — Worn</span>
-        <h3>Mines Pack — On Trail</h3>
-        <p>The finished Mines commission pack loaded and on-back. Dyneema CF structure holds its shape beautifully under load while staying incredibly light.</p>
-      </div>
-    </article>
-
-    <!-- Gaiters flat -->
-    <article class="card fade-up" data-cat="gaiter">
-      <img class="card-img" src="gaiters-flat.jpg" alt="White gaiters with blue webbing laid flat in a grid" />
-      <div class="card-body">
-        <span class="card-category cat-gaiter">Gaiters — Batch</span>
-        <h3>Trail Gaiters — Production Run</h3>
-        <p>A batch of ten gaiters laid out before final assembly. White Dyneema shells with navy blue webbing, buckles, and hot-pink pull tabs for quick donning.</p>
-      </div>
-    </article>
-
-    <!-- Gaiters workshop -->
-    <article class="card fade-up" data-cat="gaiter">
-      <img class="card-img" src="gaiters-workshop.jpg" alt="Gaiters and gaiter components spread on workshop floor" />
-      <div class="card-body">
-        <span class="card-category cat-gaiter">Gaiters — Process</span>
-        <h3>Trail Gaiters — Components</h3>
-        <p>Cut components fanned out showing the full scope of a batch run — white Dyneema fronts, pink and black neoprene instep straps, and blue webbing ready for assembly.</p>
       </div>
     </article>
 
