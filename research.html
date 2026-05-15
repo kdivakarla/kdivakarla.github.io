@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — Krishna Divakarla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #A67DD4;
+      --purple-dark: #7B4FAE;
+      --purple-deeper: #4A2A7A;
+      --purple-pale: #F0E8FA;
+      --purple-mid-pale: #D9C5F0;
+      --yellow: #E8A820;
+      --yellow-bright: #F5C842;
+      --earth-dark: #2A3A2A;
+      --earth-mid: #4A6040;
+      --earth-light: #8AAA70;
+      --earth-pale: #EDF3E8;
+      --text-dark: #1C1226;
+      --text-mid: #5A4A70;
+      --text-light: #9A8AAA;
+      --white: #FFFEF9;
+      --off-white: #F8F4FF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(255,254,249,0.94); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--purple-pale);
+    }
+    .nav-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--purple-deeper); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--purple-dark); }
+
+    /* HERO */
+    .page-hero {
+      padding: 9rem 3rem 5rem;
+      background: var(--earth-dark);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(74,42,122,0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 700px; position: relative; z-index: 1; }
+    .page-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--earth-light); margin-bottom: 1rem; }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.03em;
+      color: var(--white); margin-bottom: 1.2rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--yellow-bright); }
+    .page-hero p { font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(255,254,249,0.65); max-width: 520px; }
+
+    .topic-pills {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
+    }
+    .pill {
+      padding: 0.35rem 1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em;
+      border: 1.5px solid rgba(255,254,249,0.2);
+      color: rgba(255,254,249,0.7);
+    }
+
+    /* RESEARCH INTERESTS */
+    .interests {
+      padding: 5rem 3rem;
+      background: var(--earth-pale);
+      display: grid; grid-template-columns: 120px 1fr; gap: 4rem; align-items: start;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--earth-mid); padding-top: 0.3rem; }
+    .interests-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.3; letter-spacing: -0.02em; color: var(--earth-dark); margin-bottom: 1.2rem; }
+    .interests-content p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: #4A5A40; margin-bottom: 0.8rem; }
+
+    .interest-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 2rem;
+    }
+    .int-card {
+      background: var(--white); border: 1px solid #C8DFC0; border-radius: 6px; padding: 1.4rem 1.5rem;
+    }
+    .int-card-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+    .int-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--earth-dark); margin-bottom: 0.4rem; }
+    .int-card p { font-size: 0.83rem; font-weight: 300; line-height: 1.6; color: #5A7050; }
+
+    /* PUBLICATIONS / PROJECTS */
+    .pubs-section { padding: 5rem 3rem 6rem; max-width: 900px; margin: 0 auto; }
+    .pubs-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .pubs-section .subtitle { font-size: 0.9rem; font-weight: 300; color: var(--text-light); margin-bottom: 2.5rem; }
+
+    .pub-entry {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--purple-pale);
+      display: grid; grid-template-columns: 60px 1fr; gap: 1.4rem; align-items: start;
+    }
+    .pub-year { font-size: 0.8rem; font-weight: 500; color: var(--purple); padding-top: 0.2rem; }
+    .pub-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text-dark); line-height: 1.35; margin-bottom: 0.4rem; }
+    .pub-authors { font-size: 0.83rem; font-weight: 300; color: var(--text-light); margin-bottom: 0.3rem; }
+    .pub-venue { font-size: 0.83rem; font-weight: 400; color: var(--text-mid); font-style: italic; }
+    .pub-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.6rem; }
+    .pub-tag {
+      padding: 0.18rem 0.6rem; border-radius: 100px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tag-land { background: #FDEAE8; color: #8A2A20; }
+    .tag-climate { background: #E8F4FB; color: #1A6090; }
+    .tag-remote { background: #EDF3E8; color: #3D7030; }
+    .tag-field { background: var(--purple-pale); color: var(--purple-dark); }
+
+    /* Placeholder notice */
+    .placeholder-notice {
+      background: var(--yellow-pale, #FDF6DC); border-left: 3px solid var(--yellow);
+      padding: 1rem 1.2rem; border-radius: 0 6px 6px 0;
+      font-size: 0.85rem; color: #7A5010; margin-bottom: 2rem; line-height: 1.6;
+    }
+
+    footer { padding: 1.8rem 3rem; background: var(--purple-deeper); display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,254,249,0.4); }
+    footer a { font-size: 0.8rem; color: rgba(255,254,249,0.4); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow-bright); }
+
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 7rem 1.5rem 3rem; }
+      .interests { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0.8rem; }
+      .pubs-section { padding: 3rem 1.5rem; }
+      .pub-entry { grid-template-columns: 1fr; gap: 0.3rem; }
+      .pub-year { font-size: 0.75rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Krishna Divakarla</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="making.html">Making</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-inner">
+    <p class="page-eyebrow">Earth Science Research</p>
+    <h1>Geohazards in a<br/><em>changing climate.</em></h1>
+    <p>I study how landslides, debris flows, and other geohazards are responding to climate change in mountain environments — understanding risk, dynamics, and landscape change.</p>
+    <div class="topic-pills">
+      <span class="pill">Landslides</span>
+      <span class="pill">Debris Flows</span>
+      <span class="pill">Mountain Geomorphology</span>
+      <span class="pill">Climate Change</span>
+      <span class="pill">Remote Sensing</span>
+      <span class="pill">Hazard Assessment</span>
+    </div>
+  </div>
+</section>
+
+<section class="interests" style="max-width:100%;padding-left:max(3rem, calc(50% - 460px));padding-right:max(3rem, calc(50% - 460px));">
+  <div><p class="section-label">Research themes</p></div>
+  <div class="interests-content fade-up">
+    <h2>Mountains are changing faster than we understand.</h2>
+    <p>My research sits at the intersection of geomorphology, hydrology, and climate science — asking how warming temperatures, shifting precipitation patterns, and permafrost thaw are altering the frequency, magnitude, and distribution of mass movements in mountain landscapes.</p>
+    <div class="interest-cards">
+      <div class="int-card">
+        <div class="int-card-icon">⛰️</div>
+        <h4>Landslide dynamics</h4>
+        <p>Triggers, runout behavior, and temporal patterns of slope failures across mountain systems.</p>
+      </div>
+      <div class="int-card">
+        <div class="int-card-icon">🌊</div>
+        <h4>Debris flows</h4>
+        <p>How sediment, water, and topography combine to produce channelized mass movements.</p>
+      </div>
+      <div class="int-card">
+        <div class="int-card-icon">🛰️</div>
+        <h4>Remote sensing</h4>
+        <p>Using satellite imagery, lidar, and structure-from-motion to map hazards at scale.</p>
+      </div>
+      <div class="int-card">
+        <div class="int-card-icon">🌡️</div>
+        <h4>Climate linkages</h4>
+        <p>Connecting atmospheric and hydrological drivers to geohazard activity and landscape change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pubs-section">
+  <h2>Publications & Projects</h2>
+  <p class="subtitle">Add your papers, theses, and research projects here.</p>
+
+  <div class="placeholder-notice">
+    ✏️ <strong>Edit this page:</strong> Replace the example entries below with your own publications, conference papers, and projects. Each entry uses the same HTML block — just copy, paste, and fill in your details.
+  </div>
+
+  <!-- Example entry 1 — replace with your own -->
+  <div class="pub-entry fade-up">
+    <div class="pub-year">2024</div>
+    <div>
+      <p class="pub-title">Your Publication Title Goes Here</p>
+      <p class="pub-authors">Divakarla, K., Co-Author, A., Co-Author, B.</p>
+      <p class="pub-venue">Journal of Geophysical Research: Earth Surface</p>
+      <div class="pub-tags">
+        <span class="pub-tag tag-land">Landslides</span>
+        <span class="pub-tag tag-climate">Climate</span>
+        <span class="pub-tag tag-remote">Remote Sensing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example entry 2 -->
+  <div class="pub-entry fade-up">
+    <div class="pub-year">2023</div>
+    <div>
+      <p class="pub-title">Another Publication or Thesis Title Here</p>
+      <p class="pub-authors">Divakarla, K.</p>
+      <p class="pub-venue">MS Thesis — Colorado School of Mines</p>
+      <div class="pub-tags">
+        <span class="pub-tag tag-land">Debris Flows</span>
+        <span class="pub-tag tag-field">Field Work</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example entry 3 -->
+  <div class="pub-entry fade-up">
+    <div class="pub-year">2022</div>
+    <div>
+      <p class="pub-title">Conference Abstract or Poster Title Here</p>
+      <p class="pub-authors">Divakarla, K., Advisor, N.</p>
+      <p class="pub-venue">AGU Fall Meeting 2022</p>
+      <div class="pub-tags">
+        <span class="pub-tag tag-climate">Climate</span>
+        <span class="pub-tag tag-remote">Remote Sensing</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2025 Krishna Divakarla</p>
+  <a href="index.html">← Back home</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
