@@ -38,13 +38,18 @@
     .nav-links a:hover { color: var(--purple-dark); }
 
     .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center;
-      padding: 8rem 2rem 5rem; background: var(--off-white); position: relative; overflow: hidden;
+      background-image: url('objects/science/glaciers/portage_glacier.jpeg');
+      background-size: cover;
+      background-position: center;
+      position: relative; /* needed so the overlay stays inside */
     }
-    .bg-orb { position: absolute; border-radius: 50%; pointer-events: none; }
-    .bg-orb.o1 { width: 600px; height: 600px; top: -150px; right: -150px; background: radial-gradient(circle, rgba(166,125,212,0.18) 0%, transparent 70%); }
-    .bg-orb.o2 { width: 350px; height: 350px; bottom: -80px; left: -80px; background: radial-gradient(circle, rgba(232,168,32,0.12) 0%, transparent 70%); }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;             /* shorthand for top/right/bottom/left: 0 */
+      background: rgba(0, 0, 0, 0.35); /* tweak the 0.35 — higher = darker */
+    }
 
     .hero-logo { width: 150px; height: 150px; object-fit: contain; margin-bottom: 2rem; position: relative; z-index: 1; animation: float 6s ease-in-out infinite; }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
@@ -102,9 +107,6 @@
 </nav>
 
 <section class="hero">
-  <div class="bg-orb o1"></div>
-  <div class="bg-orb o2"></div>
-  <img src="objects/aramse/logo.png" alt="Aram Se — a daisy with a mountain" class="hero-logo" />
   <h1>Krishna Divakarla</h1>
   <p class="hero-sub">Maker of technical outdoor gear & researcher of Earth's geohazards in a changing climate.</p>
   <div class="hero-cards">
