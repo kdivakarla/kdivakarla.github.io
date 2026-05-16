@@ -38,10 +38,17 @@
     .nav-links a:hover { color: var(--purple-dark); }
 
     .hero {
-      background-image: url('objects/science/glaciers/portage_glacier.jpeg');
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      background-image: url('objects/seldovia.jpeg');
       background-size: cover;
       background-position: center;
-      position: relative; /* needed so the overlay stays inside */
+      position: relative;
     }
 
     .hero::before {
@@ -108,22 +115,7 @@
 
 <section class="hero">
   <h1>Krishna Divakarla</h1>
-  <p class="hero-sub">Maker of technical outdoor gear & researcher of Earth's geohazards in a changing climate.</p>
-  <div class="hero-cards">
-    <a href="making.html" class="hero-card fade-up">
-      <span class="card-icon">🧵</span>
-      <span class="card-eyebrow">Making</span>
-      <span class="card-title">Aram Se</span>
-      <span class="card-desc">Handmade ultralight packs, quilts & outdoor gear</span>
-      <span class="card-arrow">→</span>
-    </a>
-    <a href="research.html" class="hero-card fade-up">
-      <span class="card-icon">🏔️</span>
-      <span class="card-eyebrow">Research</span>
-      <span class="card-title">Earth Science</span>
-      <span class="card-desc">Geohazards & climate change in mountain landscapes</span>
-      <span class="card-arrow">→</span>
-    </a>
+  <p class="hero-sub">Researcher and maker. Approaching the world through fostering connections to people and place.</p>
   </div>
 </section>
 
