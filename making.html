@@ -276,11 +276,11 @@
 
 <div class="filter-bar">
   <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" onclick="filter('all', this)">All</button>
-  <button class="filter-btn" onclick="filter('pack', this)">Packs</button>
-  <button class="filter-btn" onclick="filter('quilt', this)">Quilts</button>
-  <button class="filter-btn" onclick="filter('bag', this)">Bike Bags</button>
-  <button class="filter-btn" onclick="filter('misc', this)">Misc</button>
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('pack', this)">Packs</button>
+  <button class="filter-btn" onclick="filterCards('quilt', this)">Quilts</button>
+  <button class="filter-btn" onclick="filterCards('bag', this)">Bike Bags</button>
+  <button class="filter-btn" onclick="filterCards('misc', this)">Misc</button>
 </div>
 
 <section class="projects">
@@ -289,12 +289,7 @@
     <!-- Purple ultralight pack -->
     <article class="card fade-up" data-cat="pack"
       data-title="Trail Running Pack"
-      data-images="objects/aramse/trailrunningpack/packoblique.jpeg|
-      objects/aramse/trailrunningpack/packbackwearing.jpg|
-      objects/aramse/trailrunningpack/packfront.jpeg|
-      objects/aramse/trailrunningpack/packobliquewearing.jpeg|
-      objects/aramse/trailrunningpack/packside.jpeg|
-      objects/aramse/trailrunningpack/packsidewearing.jpeg"
+      data-images="objects/aramse/trailrunningpack/packoblique.jpeg|objects/aramse/trailrunningpack/packbackwearing.jpg|objects/aramse/trailrunningpack/packfront.jpeg|objects/aramse/trailrunningpack/packobliquewearing.jpeg|objects/aramse/trailrunningpack/packside.jpeg|objects/aramse/trailrunningpack/packsidewearing.jpeg"
       data-captions="Front view — lilac Dyneema body with grey mesh pocket and yellow hip belt|Side view — roll-top closure with side compression straps">
       <div class="card-img-wrap" onclick="openLightbox(this.closest('.card'))">
         <img src="objects/aramse/trailrunningpack/packoblique.jpeg" alt="Trail Running Pack" />
