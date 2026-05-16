@@ -11,8 +11,6 @@
       --purple-dark: #7B4FAE;
       --purple-deeper: #4A2A7A;
       --purple-pale: #F0E8FA;
-      --purple-mid-pale: #D9C5F0;
-      --yellow: #E8A820;
       --yellow-bright: #F5C842;
       --text-dark: #1C1226;
       --text-mid: #5A4A70;
@@ -20,10 +18,12 @@
       --white: #FFFEF9;
       --off-white: #F8F4FF;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
 
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -36,217 +36,141 @@
     .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--purple-dark); }
 
-    /* HERO BANNER */
-    .page-hero {
-      padding: 9rem 3rem 5rem;
-      background: var(--purple-deeper);
-      position: relative; overflow: hidden;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-      max-width: 100%;
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 700px;
     }
-    .page-hero::after {
-      content: ''; position: absolute; top: -100px; right: -100px;
-      width: 450px; height: 450px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,200,66,0.12) 0%, transparent 70%);
-      pointer-events: none;
+    .page-eyebrow {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 1rem; display: block;
     }
-    .page-hero-text { position: relative; z-index: 1; }
-    .page-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow-bright); margin-bottom: 1rem; }
-    .page-hero h1 {
+    .page-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700;
-      line-height: 1.08; letter-spacing: -0.03em;
-      color: var(--white); margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.03em; color: var(--text-dark);
+      margin-bottom: 1.2rem;
     }
-    .page-hero h1 em { font-style: italic; color: var(--yellow-bright); }
-    .page-hero p { font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(255,254,249,0.65); max-width: 420px; }
-    .logo-area { position: relative; z-index: 1; display: flex; justify-content: center; }
-    .logo-area img { width: 180px; height: 180px; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3)); }
-
-    /* FILTER */
-    .filter-bar {
-      padding: 2.5rem 3rem 1.5rem;
-      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-      border-bottom: 1px solid var(--purple-pale);
-    }
-    .filter-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); }
-    .filter-btn {
-      padding: 0.38rem 1rem;
-      border: 1.5px solid var(--purple-mid-pale); background: transparent;
-      color: var(--text-mid); font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem; font-weight: 500; cursor: pointer;
-      border-radius: 100px; transition: all 0.2s;
-    }
-    .filter-btn.active, .filter-btn:hover { background: var(--purple); border-color: var(--purple); color: var(--white); }
-
-    /* PROJECTS GRID */
-    .projects { padding: 3rem 3rem 6rem; max-width: 1200px; margin: 0 auto; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-
-    .card {
-      background: var(--white); border: 1px solid var(--purple-pale);
-      border-radius: 6px; overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 42px rgba(120,70,180,0.1); }
-
-    .card-img {
-      width: 100%; aspect-ratio: 4/3;
-      object-fit: cover; display: block;
-      background: var(--purple-pale);
-    }
-    .card-img-placeholder {
-      width: 100%; aspect-ratio: 4/3;
-      background: var(--purple-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; color: var(--purple); font-style: italic;
+    .page-header h1 em { font-style: italic; color: var(--purple-dark); }
+    .page-header p {
+      font-size: 1rem; font-weight: 300; line-height: 1.75;
+      color: var(--text-mid); max-width: 480px;
     }
 
-    /* CARD */
-    .card {
-      background: var(--white); border: 1px solid var(--purple-pale);
-      border-radius: 6px; overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
+    /* COLLAGE */
+    .collage {
+      padding: 0 1.5rem 6rem;
+      columns: 3 280px;
+      column-gap: 8px;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 42px rgba(120,70,180,0.1); }
 
-    /* Clickable hero image wrapper */
-    .card-img-wrap {
-      position: relative; cursor: pointer; overflow: hidden;
+    .collage-item {
+      break-inside: avoid;
+      position: relative;
+      margin-bottom: 8px;
+      overflow: hidden;
+      cursor: default;
     }
-    .card-img-wrap img {
-      width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
-      transition: transform 0.35s ease;
-    }
-    .card-img-wrap:hover img { transform: scale(1.04); }
 
-    /* Photo count badge */
-    .photo-count {
-      position: absolute; bottom: 0.7rem; right: 0.7rem;
-      background: rgba(28,18,38,0.72); backdrop-filter: blur(4px);
-      color: rgba(255,254,249,0.9);
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
-      padding: 0.25rem 0.65rem; border-radius: 100px;
+    /* vary sizes with nth-child patterns for natural rhythm */
+    .collage-item:nth-child(3n+1) { margin-bottom: 10px; }
+    .collage-item:nth-child(5n+2) { margin-bottom: 6px; }
+
+    .collage-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* portrait photos: taller aspect */
+    .collage-item.portrait img {
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    /* landscape photos: wider aspect */
+    .collage-item.landscape img {
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    /* square photos */
+    .collage-item.square img {
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+
+    /* wide/cinematic */
+    .collage-item.wide img {
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    .collage-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Hover caption */
+    .collage-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2.5rem 1rem 0.9rem;
+      background: linear-gradient(to top, rgba(15,8,28,0.72) 0%, transparent 100%);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
       pointer-events: none;
     }
+    .collage-item:hover .collage-caption { opacity: 1; transform: translateY(0); }
 
-    /* Expand hint on hover */
-    .expand-hint {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(74,42,122,0); transition: background 0.25s;
+    .collage-caption span {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: rgba(255,254,249,0.9);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
     }
-    .card-img-wrap:hover .expand-hint { background: rgba(74,42,122,0.25); }
-    .expand-hint span {
-      opacity: 0; transform: scale(0.8);
-      transition: opacity 0.2s, transform 0.2s;
-      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
-      color: var(--white); background: rgba(74,42,122,0.75);
-      padding: 0.45rem 1.1rem; border-radius: 100px;
-      backdrop-filter: blur(4px);
-    }
-    .card-img-wrap:hover .expand-hint span { opacity: 1; transform: scale(1); }
-
-    .card-body { padding: 1.3rem 1.4rem 1.6rem; }
-    .card-category {
-      display: inline-block; margin-bottom: 0.7rem;
-      padding: 0.22rem 0.7rem; border-radius: 100px;
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .cat-pack { background: var(--purple-pale); color: var(--purple-dark); }
-    .cat-quilt { background: #EBF4E8; color: #3D7A2A; }
-    .cat-bag { background: #FDF6DC; color: #9A5A00; }
-    .cat-gaiter { background: #FDE8F0; color: #A03060; }
-
-    .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.3; }
-    .card-body p { font-size: 0.88rem; font-weight: 300; line-height: 1.65; color: var(--text-light); }
-
-    /* ── LIGHTBOX ── */
-    #lightbox {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(15,8,28,0.95); backdrop-filter: blur(6px);
-      flex-direction: column; align-items: center; justify-content: center;
-    }
-    #lightbox.open { display: flex; }
-
-    .lb-close {
-      position: absolute; top: 1.2rem; right: 1.5rem;
-      background: none; border: none; cursor: pointer;
-      color: rgba(255,254,249,0.6); font-size: 2rem; line-height: 1;
-      transition: color 0.2s;
-    }
-    .lb-close:hover { color: var(--white); }
-
-    .lb-img-wrap {
-      flex: 1; display: flex; align-items: center; justify-content: center;
-      padding: 4rem 6rem 1rem; width: 100%; max-height: calc(100vh - 160px);
-    }
-    #lb-img {
-      max-width: 100%; max-height: 100%;
-      object-fit: contain; border-radius: 4px;
-      transition: opacity 0.2s;
-    }
-    #lb-img.fading { opacity: 0; }
-
-    .lb-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(255,254,249,0.08); border: 1px solid rgba(255,254,249,0.15);
-      color: var(--white); font-size: 1.4rem;
-      width: 3rem; height: 3rem; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.2s; user-select: none;
-    }
-    .lb-nav:hover { background: rgba(166,125,212,0.35); }
-    #lb-prev { left: 1.2rem; }
-    #lb-next { right: 1.2rem; }
-    .lb-nav.hidden { opacity: 0; pointer-events: none; }
-
-    .lb-bottom {
-      padding: 0.8rem 2rem 1.5rem;
-      display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
-      width: 100%;
-    }
-    .lb-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
-    .lb-caption { font-size: 0.82rem; font-weight: 300; color: rgba(255,254,249,0.5); }
-
-    /* Thumbnail strip */
-    .lb-thumbs {
-      display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
-      max-width: 600px;
-    }
-    .lb-thumb {
-      width: 52px; height: 52px; object-fit: cover; border-radius: 3px;
-      cursor: pointer; opacity: 0.45; transition: opacity 0.2s, outline 0.15s;
-      outline: 2px solid transparent;
-    }
-    .lb-thumb.active { opacity: 1; outline: 2px solid var(--purple); }
-    .lb-thumb:hover { opacity: 0.85; }
 
     /* ABOUT ARAM SE */
     .about-section {
       padding: 5rem 3rem 4rem;
       background: var(--off-white);
-      display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start;
-      max-width: 1000px; margin: 0 auto;
+      border-top: 1px solid var(--purple-pale);
+      display: grid; grid-template-columns: 120px 1fr; gap: 4rem; align-items: start;
+      max-width: 900px; margin: 0 auto;
     }
-    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); padding-top: 0.3rem; }
-    .about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.3; letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 1rem; }
-    .about-text p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--text-mid); margin-bottom: 0.8rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--purple); padding-top: 0.3rem;
+    }
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400; line-height: 1.3;
+      letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 1rem;
+    }
+    .about-text p {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: var(--text-mid); margin-bottom: 0.8rem;
+    }
 
-    footer { padding: 1.8rem 3rem; background: var(--purple-deeper); display: flex; justify-content: space-between; align-items: center; }
+    footer {
+      padding: 1.8rem 3rem;
+      background: var(--purple-deeper);
+      display: flex; justify-content: space-between; align-items: center;
+    }
     footer p { font-size: 0.8rem; color: rgba(255,254,249,0.4); }
     footer a { font-size: 0.8rem; color: rgba(255,254,249,0.4); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--yellow-bright); }
 
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .page-hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
-      .logo-area { display: none; }
-      .filter-bar, .projects { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .collage { padding: 0 0.75rem 4rem; columns: 2 140px; column-gap: 5px; }
+      .collage-item { margin-bottom: 5px; }
       .about-section { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0.8rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
@@ -263,158 +187,78 @@
   </ul>
 </nav>
 
-<section class="page-hero">
-  <div class="page-hero-text">
-    <p class="page-eyebrow">Making — Aram Se</p>
-    <h1>Gear made<br/><em>with care.</em></h1>
-    <p>Handmade ultralight outdoor equipment sewn from technical fabrics — backpacks, sleeping quilts, handlebar bags, gaiters, and more. Each piece is designed for the trail and made by hand.</p>
-  </div>
-  <div class="logo-area">
-    <img src="objects/aramse/logo.png" alt="Aram Se logo" />
-  </div>
-</section>
-
-<div class="filter-bar">
-  <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-  <button class="filter-btn" onclick="filterCards('pack', this)">Packs</button>
-  <button class="filter-btn" onclick="filterCards('quilt', this)">Quilts</button>
-  <button class="filter-btn" onclick="filterCards('bag', this)">Bike Bags</button>
-  <button class="filter-btn" onclick="filterCards('misc', this)">Misc</button>
+<div class="page-header">
+  <span class="page-eyebrow">Making — Aram Se</span>
+  <h1>Gear made<br/><em>with care.</em></h1>
+  <p>Handmade ultralight outdoor equipment sewn from technical fabrics — backpacks, sleeping quilts, handlebar bags, gaiters, and more.</p>
 </div>
 
-<section class="projects">
-  <div class="grid" id="grid">
+<!--
+  COLLAGE — how to use:
+  Each .collage-item needs one of these classes to control its shape:
+    .portrait   (3:4  — tall, good for packs on people, vertical shots)
+    .landscape  (4:3  — standard horizontal)
+    .square     (1:1  — good for detail/texture shots)
+    .wide       (16:9 — cinematic, good for outdoor/setting shots)
 
-    <!-- Purple ultralight pack -->
-    <article class="card fade-up" data-cat="pack"
-      data-title="Trail Running Pack"
-      data-images="objects/aramse/trailrunningpack/packoblique.jpeg|objects/aramse/trailrunningpack/packbackwearing.jpg|objects/aramse/trailrunningpack/packfront.jpeg|objects/aramse/trailrunningpack/packobliquewearing.jpeg|objects/aramse/trailrunningpack/packside.jpeg|objects/aramse/trailrunningpack/packsidewearing.jpeg"
-      data-captions="Front view — lilac Dyneema body with grey mesh pocket and yellow hip belt|Side view — roll-top closure with side compression straps">
-      <div class="card-img-wrap" onclick="openLightbox(this.closest('.card'))">
-        <img src="objects/aramse/trailrunningpack/packoblique.jpeg" alt="Trail Running Pack" />
-        <div class="expand-hint"><span>View all photos</span></div>
-        <span class="photo-count">6 photos</span>
-      </div>
-      <div class="card-body">
-        <span class="card-category cat-pack">Pack</span>
-        <h3>Trail Runnning Pack</h3>
-        <p> Ultra 400 pack with running vest straps. Built for active movement through changing mountain environments.</p>
-      </div>
-    </article>
+  Add a data-caption for the hover text.
+  Mix the shape classes freely — the column layout handles the rest.
+-->
 
+<section class="collage">
+
+  <!-- Row feel: landscape, portrait, landscape -->
+  <div class="collage-item portrait" data-caption="Trail Running Pack — Ultra 400 with running vest straps">
+    <img src="objects/aramse/trailrunningpack/packoblique.jpeg" alt="Trail running pack, oblique view" />
+    <div class="collage-caption"><span>Trail Running Pack</span></div>
   </div>
+
+  <div class="collage-item portrait" data-caption="Wearing the pack to visualize how the load sits high on your back">
+    <img src="objects/aramse/trailrunningpack/packbackwearing.jpg" alt="Pack worn from behind on trail" />
+    <div class="collage-caption"><span>Back view</span></div>
+  </div>
+
+  <div class="collage-item portrait" data-caption="Vest straps">
+    <img src="objects/aramse/trailrunningpack/packfront.jpeg" alt="Pack front view" />
+    <div class="collage-caption"><span>Pack front</span></div>
+  </div>
+
+  <div class="collage-item portrait" data-caption="Pack worn, oblique">
+    <img src="objects/aramse/trailrunningpack/packobliquewearing.jpeg" alt="Pack worn, oblique" />
+    <div class="collage-caption"><span>Oblique, worn</span></div>
+  </div>
+  <!--
+    ════════════════════════════════════════
+    ADD YOUR REMAINING PHOTOS BELOW
+    Copy any block above and change:
+      1. The shape class (portrait / landscape / square / wide)
+      2. The src path to your photo
+      3. The alt text
+      4. The data-caption / inner <span> text
+    ════════════════════════════════════════
+
+  <div class="collage-item wide" data-caption="Your caption here">
+    <img src="objects/aramse/YOUR_FOLDER/YOUR_PHOTO.jpg" alt="Description" />
+    <div class="collage-caption"><span>Short caption</span></div>
+  </div>
+
+  -->
+
 </section>
 
 <section class="about-section">
   <div><p class="section-label">About Aram Se</p></div>
-  <div class="about-text fade-up">
+  <div class="about-text">
     <h2>आराम से — take it easy.</h2>
     <p>Aram Se is my making practice — a name that carries the Hindi phrase for "take it easy, take your time." Every piece is designed and sewn by hand, made to be used hard in the outdoors.</p>
-    <p>I work primarily with technical fabrics like Dyneema Composite Fabric (DCF/cuben), X-Pac, and ripstop nylon — materials that are incredibly strong, light, and weather-resistant. Each project is an exercise in thoughtful design and careful construction.</p>
+    <p>I work primarily with technical fabrics like Challenge Ultra, and EcoPack — materials that are incredibly strong, light, and weather-resistant. Each project is an exercise in thoughtful design and careful construction.</p>
   </div>
 </section>
 
 <footer>
-  <p>© 2025 Krishna Divakarla — Aram Se</p>
+  <p>© 2026 Krishna Divakarla — Aram Se</p>
   <a href="index.html">← Back home</a>
 </footer>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
-  <button class="lb-close" onclick="closeLightbox()" aria-label="Close gallery">×</button>
-  <button class="lb-nav" id="lb-prev" onclick="navigate(-1)" aria-label="Previous photo">‹</button>
-  <button class="lb-nav" id="lb-next" onclick="navigate(1)" aria-label="Next photo">›</button>
-
-  <div class="lb-img-wrap">
-    <img id="lb-img" src="" alt="" />
-  </div>
-
-  <div class="lb-bottom">
-    <p class="lb-title" id="lb-title"></p>
-    <p class="lb-caption" id="lb-caption"></p>
-    <div class="lb-thumbs" id="lb-thumbs"></div>
-  </div>
-</div>
-
-<script>
-  let lbImages = [], lbCaptions = [], lbIndex = 0, lbTitle = '';
-
-  function openLightbox(card) {
-    lbImages = card.dataset.images.split('|');
-    lbCaptions = card.dataset.captions.split('|');
-    lbTitle = card.dataset.title;
-    lbIndex = 0;
-    buildThumbs();
-    showImage(0);
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function buildThumbs() {
-    const strip = document.getElementById('lb-thumbs');
-    strip.innerHTML = '';
-    lbImages.forEach((src, i) => {
-      const t = document.createElement('img');
-      t.src = src; t.className = 'lb-thumb'; t.alt = '';
-      t.onclick = () => showImage(i);
-      strip.appendChild(t);
-    });
-  }
-
-  function showImage(idx) {
-    lbIndex = idx;
-    const img = document.getElementById('lb-img');
-    img.classList.add('fading');
-    setTimeout(() => {
-      img.src = lbImages[idx];
-      img.alt = lbCaptions[idx] || '';
-      img.classList.remove('fading');
-    }, 160);
-    document.getElementById('lb-title').textContent = lbTitle;
-    document.getElementById('lb-caption').textContent = lbCaptions[idx] || '';
-    document.getElementById('lb-prev').classList.toggle('hidden', idx === 0);
-    document.getElementById('lb-next').classList.toggle('hidden', idx === lbImages.length - 1);
-    document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
-  }
-
-  function navigate(dir) {
-    const next = lbIndex + dir;
-    if (next >= 0 && next < lbImages.length) showImage(next);
-  }
-
-  // Keyboard navigation
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') navigate(-1);
-    if (e.key === 'ArrowRight') navigate(1);
-  });
-
-  // Click backdrop to close
-  document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  });
-
-  // Filter
-  function filterCards(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.card').forEach(c => {
-      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
-    });
-  }
-
-  // Scroll fade-in
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-</script>
 </body>
 </html>
