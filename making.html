@@ -325,14 +325,97 @@
   <a href="index.html">← Back home</a>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <button class="lb-close" onclick="closeLightbox()" aria-label="Close gallery">×</button>
+  <button class="lb-nav" id="lb-prev" onclick="navigate(-1)" aria-label="Previous photo">‹</button>
+  <button class="lb-nav" id="lb-next" onclick="navigate(1)" aria-label="Next photo">›</button>
+
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="" />
+  </div>
+
+  <div class="lb-bottom">
+    <p class="lb-title" id="lb-title"></p>
+    <p class="lb-caption" id="lb-caption"></p>
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+  </div>
+</div>
+
 <script>
-  function filter(cat, btn) {
+  let lbImages = [], lbCaptions = [], lbIndex = 0, lbTitle = '';
+
+  function openLightbox(card) {
+    lbImages = card.dataset.images.split('|');
+    lbCaptions = card.dataset.captions.split('|');
+    lbTitle = card.dataset.title;
+    lbIndex = 0;
+    buildThumbs();
+    showImage(0);
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function buildThumbs() {
+    const strip = document.getElementById('lb-thumbs');
+    strip.innerHTML = '';
+    lbImages.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.src = src; t.className = 'lb-thumb'; t.alt = '';
+      t.onclick = () => showImage(i);
+      strip.appendChild(t);
+    });
+  }
+
+  function showImage(idx) {
+    lbIndex = idx;
+    const img = document.getElementById('lb-img');
+    img.classList.add('fading');
+    setTimeout(() => {
+      img.src = lbImages[idx];
+      img.alt = lbCaptions[idx] || '';
+      img.classList.remove('fading');
+    }, 160);
+    document.getElementById('lb-title').textContent = lbTitle;
+    document.getElementById('lb-caption').textContent = lbCaptions[idx] || '';
+    document.getElementById('lb-prev').classList.toggle('hidden', idx === 0);
+    document.getElementById('lb-next').classList.toggle('hidden', idx === lbImages.length - 1);
+    document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+  }
+
+  function navigate(dir) {
+    const next = lbIndex + dir;
+    if (next >= 0 && next < lbImages.length) showImage(next);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  // Click backdrop to close
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
+  // Filter
+  function filterCards(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.card').forEach(c => {
       c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
     });
   }
+
+  // Scroll fade-in
   const obs = new IntersectionObserver(entries => {
     entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
