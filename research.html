@@ -4,143 +4,205 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research — Krishna Divakarla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --purple: #A67DD4;
-      --purple-dark: #7B4FAE;
-      --purple-deeper: #4A2A7A;
-      --purple-pale: #F0E8FA;
-      --purple-mid-pale: #D9C5F0;
-      --yellow: #E8A820;
-      --yellow-bright: #F5C842;
-      --earth-dark: #2A3A2A;
-      --earth-mid: #4A6040;
-      --earth-light: #8AAA70;
-      --earth-pale: #EDF3E8;
-      --text-dark: #1C1226;
-      --text-mid: #5A4A70;
-      --text-light: #9A8AAA;
-      --white: #FFFEF9;
-      --off-white: #F8F4FF;
+      --stone: #1A1714;
+      --stone-mid: #3D3830;
+      --stone-light: #7A7268;
+      --stone-pale: #EAE6E0;
+      --stone-cream: #F5F2EC;
+      --sage: #5C7060;
+      --sage-pale: #DDE6DA;
+      --amber: #C8841A;
+      --amber-pale: #F5E8CC;
+      --white: #FAFAF7;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+    body { font-family: 'Instrument Sans', sans-serif; background: var(--white); color: var(--stone); overflow-x: hidden; }
 
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.1rem 3rem;
-      background: rgba(255,254,249,0.94); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--purple-pale);
+      background: rgba(250,250,247,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stone-pale);
     }
-    .nav-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--purple-deeper); text-decoration: none; }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--stone); text-decoration: none; letter-spacing: -0.01em; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--purple-dark); }
+    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--stone); }
 
-    /* HERO */
-    .page-hero {
-      padding: 9rem 3rem 5rem;
-      background: var(--earth-dark);
-      position: relative; overflow: hidden;
+    /* HERO SLIDESHOW */
+    .hero {
+      position: relative; height: 100vh; min-height: 540px;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
-    .page-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(74,42,122,0.4) 0%, transparent 60%);
-      pointer-events: none;
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 1.2s ease;
+      background-size: cover; background-position: center;
     }
-    .hero-inner { max-width: 700px; position: relative; z-index: 1; }
-    .page-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--earth-light); margin-bottom: 1rem; }
-    .page-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700;
-      line-height: 1.08; letter-spacing: -0.03em;
-      color: var(--white); margin-bottom: 1.2rem;
-    }
-    .page-hero h1 em { font-style: italic; color: var(--yellow-bright); }
-    .page-hero p { font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(255,254,249,0.65); max-width: 520px; }
+    .slide.active { opacity: 1; }
 
-    .topic-pills {
-      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,12,10,0.85) 0%, rgba(15,12,10,0.3) 50%, transparent 100%);
     }
-    .pill {
-      padding: 0.35rem 1rem; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em;
-      border: 1.5px solid rgba(255,254,249,0.2);
-      color: rgba(255,254,249,0.7);
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 4rem 4rem;
+      max-width: 680px;
     }
-
-    /* RESEARCH INTERESTS */
-    .interests {
-      padding: 5rem 3rem;
-      background: var(--earth-pale);
-      display: grid; grid-template-columns: 120px 1fr; gap: 4rem; align-items: start;
-      max-width: 1000px; margin: 0 auto;
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(250,250,247,0.5); margin-bottom: 1rem;
     }
-    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--earth-mid); padding-top: 0.3rem; }
-    .interests-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.3; letter-spacing: -0.02em; color: var(--earth-dark); margin-bottom: 1.2rem; }
-    .interests-content p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: #4A5A40; margin-bottom: 0.8rem; }
-
-    .interest-cards {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 2rem;
+    .hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 1rem;
     }
-    .int-card {
-      background: var(--white); border: 1px solid #C8DFC0; border-radius: 6px; padding: 1.4rem 1.5rem;
-    }
-    .int-card-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
-    .int-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--earth-dark); margin-bottom: 0.4rem; }
-    .int-card p { font-size: 0.83rem; font-weight: 300; line-height: 1.6; color: #5A7050; }
-
-    /* PUBLICATIONS / PROJECTS */
-    .pubs-section { padding: 5rem 3rem 6rem; max-width: 900px; margin: 0 auto; }
-    .pubs-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; color: var(--text-dark); margin-bottom: 0.5rem; }
-    .pubs-section .subtitle { font-size: 0.9rem; font-weight: 300; color: var(--text-light); margin-bottom: 2.5rem; }
-
-    .pub-entry {
-      padding: 1.6rem 0;
-      border-bottom: 1px solid var(--purple-pale);
-      display: grid; grid-template-columns: 60px 1fr; gap: 1.4rem; align-items: start;
-    }
-    .pub-year { font-size: 0.8rem; font-weight: 500; color: var(--purple); padding-top: 0.2rem; }
-    .pub-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text-dark); line-height: 1.35; margin-bottom: 0.4rem; }
-    .pub-authors { font-size: 0.83rem; font-weight: 300; color: var(--text-light); margin-bottom: 0.3rem; }
-    .pub-venue { font-size: 0.83rem; font-weight: 400; color: var(--text-mid); font-style: italic; }
-    .pub-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.6rem; }
-    .pub-tag {
-      padding: 0.18rem 0.6rem; border-radius: 100px;
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .tag-land { background: #FDEAE8; color: #8A2A20; }
-    .tag-climate { background: #E8F4FB; color: #1A6090; }
-    .tag-remote { background: #EDF3E8; color: #3D7030; }
-    .tag-field { background: var(--purple-pale); color: var(--purple-dark); }
-
-    /* Placeholder notice */
-    .placeholder-notice {
-      background: var(--yellow-pale, #FDF6DC); border-left: 3px solid var(--yellow);
-      padding: 1rem 1.2rem; border-radius: 0 6px 6px 0;
-      font-size: 0.85rem; color: #7A5010; margin-bottom: 2rem; line-height: 1.6;
+    .hero-content h1 em { font-style: italic; color: #D4A85A; }
+    .hero-content p {
+      font-size: 0.97rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,250,247,0.65); max-width: 460px;
     }
 
-    footer { padding: 1.8rem 3rem; background: var(--purple-deeper); display: flex; justify-content: space-between; align-items: center; }
-    footer p { font-size: 0.8rem; color: rgba(255,254,249,0.4); }
-    footer a { font-size: 0.8rem; color: rgba(255,254,249,0.4); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--yellow-bright); }
+    /* Slide dots */
+    .slide-dots {
+      position: absolute; bottom: 2rem; right: 3rem; z-index: 3;
+      display: flex; gap: 0.5rem;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(250,250,247,0.3); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none; padding: 0;
+    }
+    .dot.active { background: rgba(250,250,247,0.9); transform: scale(1.3); }
 
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    /* PHOTO CAPTION strip */
+    .caption-strip {
+      background: var(--stone); padding: 0.6rem 4rem;
+      display: flex; align-items: center; gap: 1rem;
+      min-height: 2.8rem;
+    }
+    .caption-text {
+      font-size: 0.78rem; font-weight: 300; color: rgba(250,250,247,0.45);
+      font-style: italic; transition: opacity 0.4s;
+    }
+    .caption-hint {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(250,250,247,0.2); margin-left: auto;
+    }
+
+    /* INTERESTS */
+    .interests { background: var(--stone-cream); padding: 6rem 4rem; }
+    .interests-inner { max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1.5rem;
+    }
+    .interests h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 400;
+      line-height: 1.2; letter-spacing: -0.02em; color: var(--stone);
+      max-width: 580px; margin-bottom: 1.4rem;
+    }
+    .interests h2 em { font-style: italic; color: var(--sage); }
+    .interests > .interests-inner > p {
+      font-size: 1rem; font-weight: 300; line-height: 1.85; color: var(--stone-mid);
+      max-width: 600px; margin-bottom: 3rem;
+    }
+
+    .theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--stone-pale); border: 1px solid var(--stone-pale); }
+    .theme-cell {
+      background: var(--white); padding: 1.6rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .theme-icon { font-size: 1.4rem; line-height: 1; }
+    .theme-cell h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--stone); }
+    .theme-cell p { font-size: 0.82rem; font-weight: 300; line-height: 1.65; color: var(--stone-light); }
+
+    /* PROJECTS */
+    .projects { padding: 6rem 4rem; max-width: 960px; margin: 0 auto; }
+    .projects h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400;
+      letter-spacing: -0.02em; color: var(--stone); margin-bottom: 0.4rem;
+    }
+    .projects .subtitle { font-size: 0.85rem; font-weight: 300; color: var(--stone-light); margin-bottom: 3.5rem; }
+
+    .project-card {
+      margin-bottom: 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;
+    }
+    .project-card:nth-child(even) { direction: rtl; }
+    .project-card:nth-child(even) > * { direction: ltr; }
+
+    .project-images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .project-images.single { grid-template-columns: 1fr; }
+    .project-img {
+      aspect-ratio: 4/3; background: var(--stone-pale);
+      border-radius: 3px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-img .img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--stone-light); font-weight: 400;
+    }
+
+    .project-info { padding-top: 0.3rem; }
+    .project-year {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.7rem;
+    }
+    .project-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 600; line-height: 1.2;
+      letter-spacing: -0.01em; color: var(--stone); margin-bottom: 0.8rem;
+    }
+    .project-info p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; color: var(--stone-mid); margin-bottom: 1rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      padding: 0.22rem 0.7rem; border-radius: 2px;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--sage-pale); color: var(--sage);
+    }
+    .tag.amber { background: var(--amber-pale); color: var(--amber); }
+
+    .divider { border: none; border-top: 1px solid var(--stone-pale); margin-bottom: 4rem; }
+
+    /* FOOTER */
+    footer {
+      padding: 1.8rem 4rem; background: var(--stone);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.78rem; color: rgba(250,250,247,0.35); }
+    footer a { font-size: 0.78rem; color: rgba(250,250,247,0.35); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: rgba(250,250,247,0.8); }
+
+    /* Animations */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .page-hero { padding: 7rem 1.5rem 3rem; }
-      .interests { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0.8rem; }
-      .pubs-section { padding: 3rem 1.5rem; }
-      .pub-entry { grid-template-columns: 1fr; gap: 0.3rem; }
-      .pub-year { font-size: 0.75rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .hero-content { padding: 0 1.5rem 3rem; }
+      .slide-dots { right: 1.5rem; }
+      .caption-strip { padding: 0.6rem 1.5rem; }
+      .interests, .projects { padding: 4rem 1.5rem; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-card:nth-child(even) { direction: ltr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
     }
   </style>
 </head>
@@ -155,98 +217,78 @@
   </ul>
 </nav>
 
-<section class="page-hero">
-  <div class="hero-inner">
-    <p class="page-eyebrow">Earth Science Research</p>
-    <h1>Geohazards in a<br/><em>changing climate.</em></h1>
-    <p>I study how landslides, debris flows, and other geohazards are responding to climate change in mountain environments — understanding risk, dynamics, and landscape change.</p>
-    <div class="topic-pills">
-      <span class="pill">Landslides</span>
-      <span class="pill">Debris Flows</span>
-      <span class="pill">Mountain Geomorphology</span>
-      <span class="pill">Climate Change</span>
-      <span class="pill">Remote Sensing</span>
-      <span class="pill">Hazard Assessment</span>
-    </div>
+<!-- ── HERO with rotating slideshow ── -->
+<section class="hero">
+  <!-- Replace background-image values with your photo URLs, e.g.:
+       style="background-image: url('photos/fieldwork-1.jpg')"  -->
+  <div class="slide slide-1 active" data-caption="Instability above Portage Glacier" style="background-image: url('objects/science/landslides/portage.jpeg')"></div>
+  <div class="slide slide-2" data-caption="Hig observing instabilities at the margin of an acively defroming rock glacier" style="background-image: url('objects/science/landslides/rockglacier.jpeg')"></div>
+  <div class="slide slide-3" data-caption="Krishna observing cracks in the instability above Portage Glacier" style="background-image: url('objects/science/landslides/krishnaportage.jpg')"></div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Earth Science · Geohazards</p>
+    <h1>Mountains in a<br/><em>changing climate.</em></h1>
+    <p>I am interested in the way landscapes change in dynamic environments.</p>
+  </div>
+
+  <div class="slide-dots" role="tablist" aria-label="Slideshow navigation">
+    <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+    <button class="dot" data-index="1" aria-label="Slide 2"></button>
+    <button class="dot" data-index="2" aria-label="Slide 3"></button>
   </div>
 </section>
 
-<section class="interests" style="max-width:100%;padding-left:max(3rem, calc(50% - 460px));padding-right:max(3rem, calc(50% - 460px));">
-  <div><p class="section-label">Research themes</p></div>
-  <div class="interests-content fade-up">
-    <h2>Mountains are changing faster than we understand.</h2>
-    <p>My research sits at the intersection of geophysics, geomorphology, hydrology, and climate science — asking how warming temperatures, shifting precipitation patterns, and permafrost thaw are altering the frequency, magnitude, and distribution of mass movements in mountain landscapes.</p>
-    <div class="interest-cards">
-      <div class="int-card">
-        <div class="int-card-icon">⛰️</div>
-        <h4>Landslide dynamics</h4>
-        <p>Triggers, runout behavior, and temporal patterns of slope failures across mountain systems.</p>
-      </div>
-      <div class="int-card">
-        <div class="int-card-icon">🌊</div>
-        <h4>Debris flows</h4>
-        <p>How sediment, water, and topography combine to produce channelized mass movements.</p>
-      </div>
-      <div class="int-card">
-        <div class="int-card-icon">🛰️</div>
-        <h4>Remote sensing</h4>
-        <p>Using satellite imagery, lidar, and structure-from-motion to map hazards at scale.</p>
-      </div>
-      <div class="int-card">
-        <div class="int-card-icon">🌡️</div>
-        <h4>Climate linkages</h4>
-        <p>Connecting atmospheric and hydrological drivers to geohazard activity and landscape change.</p>
-      </div>
-    </div>
+<!-- ── INTERESTS ── -->
+<section class="interests">
+  <div class="interests-inner fade-up">
+    <p class="section-tag">Research interests and experience</p>
+    <p>I am currently an undergraduate at Colorado School of Mines studying geophysics. Furthermore, I have the pleasure of calling myself Bretwood Higman (Hig)'s intern. Hig is truly a unique reseracher in the way he ties together wilderness adventure, geomorphology, remote sensing, and community based decision making. Through working with Hig I have had many amazing field experiences in Alaska, and I can't wait for all the amazing opprtunities to come. Specifically, in the 2026 Alaskan summer field season I will be taking on a project using tree ring information to understand past deformational histories of landslides (Dendrogeomorphology).</p>
   </div>
 </section>
 
-<section class="pubs-section">
+<!-- ── PROJECTS ── -->
+<section class="projects">
   <h2>Projects</h2>
-  <p class="subtitle">Undergrad projects</p>
+  <p class="subtitle">Undergraduate research</p>
 
-  <!-- Example entry 1 — replace with your own -->
-  <div class="pub-entry fade-up">
-    <div class="pub-year">2024</div>
-    <div>
-      <p class="pub-title">Your Publication Title Goes Here</p>
-      <p class="pub-authors">Divakarla, K., Co-Author, A., Co-Author, B.</p>
-      <p class="pub-venue">Journal of Geophysical Research: Earth Surface</p>
-      <div class="pub-tags">
-        <span class="pub-tag tag-land">Landslides</span>
-        <span class="pub-tag tag-climate">Climate</span>
-        <span class="pub-tag tag-remote">Remote Sensing</span>
+  <!-- PROJECT 1 — replace placeholder images with your own -->
+  <div class="project-card fade-up">
+    <div class="project-images">
+      <div class="project-img" >
+        <img src="objects/science/landslides/tree2.jpeg" alt ="Leaning Trees">
       </div>
+      <div class="project-img">
+        <img src="objects/science/landslides/tree1.jpeg" alt ="Split Tree">
+      </div>
+    </div>
+    <div class="project-info">
+      <p class="project-year">2024</p>
+      <h3>Dendrogeomorphology</h3>
+      <p>Trees are an excelent catologer of deformation. They bend based on ground movement, and the structure of their tree rings can accurately date when these deformational events will occur. In the upcoming 2026 summer field season, Hig and I will be collecting tree cookies (thin cross-sections from dead tress) and cores. Then this upcoming fall, we will quantitatively analyze our field data to reconstruct past deformational histories. </p>
     </div>
   </div>
 
-  <!-- Example entry 2 -->
-  <div class="pub-entry fade-up">
-    <div class="pub-year">2023</div>
-    <div>
-      <p class="pub-title">Another Publication or Thesis Title Here</p>
-      <p class="pub-authors">Divakarla, K.</p>
-      <p class="pub-venue">MS Thesis — Colorado School of Mines</p>
-      <div class="pub-tags">
-        <span class="pub-tag tag-land">Debris Flows</span>
-        <span class="pub-tag tag-field">Field Work</span>
+  <hr class="divider">
+
+  <!-- PROJECT 2 -->
+  <div class="project-card fade-up">
+    <div class="project-images">
+      <div class="project-img">
+        <img src="objects/science/glaciers/GP/lgp.png" alt ="LGP to GP Breach">
       </div>
+      <div class="project-img">
+        <img src="objects/science/glaciers/GP/alsek.png" alt ="Alsek to GP Breach">
+      </div>
+    </div>
+    <div class="project-info">
+      <p class="project-year">2026</p>
+      <h3>Gran Plateau Breach Projection</h3>
+      <p>Using airborne radar and lidar along with satellite glacier thickness, we roughly calculated when two distinct lake breaching events will occur at Grand Plateau Glacier in Southeast Alaska. The breaching threshold was calculated using the buoyant valve theory, and the above maps show when there is a pathway for breaching to occur (red is below the threshold). The left image shows a breaching event form Litlle Grand Plateau to Grand Plateau lake happening in 2030, and the right panel shows breaching occuring from Alsek lake to Grand Plateau lake in 2035. </p>
     </div>
   </div>
 
-  <!-- Example entry 3 -->
-  <div class="pub-entry fade-up">
-    <div class="pub-year">2022</div>
-    <div>
-      <p class="pub-title">Conference Abstract or Poster Title Here</p>
-      <p class="pub-authors">Divakarla, K., Advisor, N.</p>
-      <p class="pub-venue">AGU Fall Meeting 2022</p>
-      <div class="pub-tags">
-        <span class="pub-tag tag-climate">Climate</span>
-        <span class="pub-tag tag-remote">Remote Sensing</span>
-      </div>
-    </div>
-  </div>
 
 </section>
 
@@ -256,8 +298,39 @@
 </footer>
 
 <script>
+  // Slideshow
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const caption = document.getElementById('slide-caption');
+  let current = 0, timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    caption.style.opacity = '0';
+    setTimeout(() => {
+      caption.textContent = slides[current].dataset.caption || '';
+      caption.style.opacity = '1';
+    }, 300);
+  }
+
+  function startAuto() { timer = setInterval(() => goTo(current + 1), 5000); }
+  function resetAuto() { clearInterval(timer); startAuto(); }
+
+  dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.index); resetAuto(); }));
+  startAuto();
+
+  // Fade-up on scroll
   const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); } });
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        obs.unobserve(e.target);
+      }
+    });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
