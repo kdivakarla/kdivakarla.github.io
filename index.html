@@ -42,7 +42,7 @@
       background: none; border: none; cursor: pointer; padding: 4px; z-index: 101;
     }
     .hamburger span {
-      display: block; width: 22px; height: 1.5px; background: var(--stone);
+      display: block; width: 22px; height: 1.5px; background: var(--text-dark);
       transition: transform 0.3s, opacity 0.3s;
     }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -57,7 +57,7 @@
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
       font-size: 1.5rem; font-family: 'Cormorant Garamond', serif;
-      font-weight: 400; color: var(--stone); text-decoration: none;
+      font-weight: 400; color: var(--text-dark); text-decoration: none;
     }
     .mobile-menu a.active { color: var(--sage); }
 
@@ -144,6 +144,12 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<div class="mobile-menu" role="dialog" aria-label="Navigation">
+  <a href="index.html#about" class="active">About</a>
+  <a href="making.html">Making</a>
+  <a href="research.html">Research</a>
+</div>
 
 <section class="hero">
   <h1>Krishna Divakarla</h1>
