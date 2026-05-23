@@ -5,212 +5,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trails & Wilderness — Krishna Divakarla</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
       --stone: #1A1714;
       --stone-mid: #3D3830;
       --stone-light: #7A7268;
       --stone-pale: #EAE6E0;
-      --stone-cream: #F5F2EC;
       --sage: #5C7060;
-      --sage-pale: #DDE6DA;
       --sage-dark: #3A4E3C;
       --amber: #C8841A;
-      --amber-pale: #F5E8CC;
       --white: #FAFAF7;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Instrument Sans', sans-serif; background: var(--white); color: var(--stone); overflow-x: hidden; }
+    body { font-family: 'Instrument Sans', sans-serif; background: var(--stone); color: var(--white); overflow-x: hidden; }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.1rem 3rem;
-      background: rgba(250,250,247,0.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--stone-pale);
+      background: rgba(26,23,20,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(250,250,247,0.08);
     }
-    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--stone); text-decoration: none; letter-spacing: -0.01em; }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: -0.01em; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-light); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--stone); }
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px; z-index: 201;
-    }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--stone); transition: transform 0.3s, opacity 0.3s; }
+    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,247,0.45); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: transform 0.3s, opacity 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 199;
-      background: var(--white); flex-direction: column;
-      align-items: center; justify-content: center; gap: 2.5rem;
-    }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; background: var(--stone); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: var(--stone); text-decoration: none; }
-    .mobile-menu a.active { color: var(--sage); }
+    .mobile-menu a { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: var(--white); text-decoration: none; }
+    .mobile-menu a.active { color: #A8C8A0; }
 
-    /* PAGE HEADER */
-    .page-header {
-      padding: 7rem 4rem 3rem;
-      background: var(--sage-dark);
-      position: relative; overflow: hidden;
+    .intro {
+      padding: 9rem 4rem 5rem;
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end;
     }
-    .page-header::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: rgba(250,250,247,0.1);
-    }
-    .header-inner { max-width: 680px; position: relative; z-index: 1; }
-    .eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250,250,247,0.45); margin-bottom: 0.9rem; }
-    .page-header h1 {
+    .intro-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250,250,247,0.35); margin-bottom: 1.2rem; }
+    .intro h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
-      color: var(--white); margin-bottom: 1rem;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 400; line-height: 1.02; letter-spacing: -0.02em;
+      color: var(--white); margin-bottom: 1.4rem;
     }
-    .page-header h1 em { font-style: italic; color: #A8C8A0; }
-    .page-header p { font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: rgba(250,250,247,0.6); max-width: 480px; }
+    .intro h1 em { font-style: italic; color: #A8C8A0; }
+    .intro-right p { font-size: 1rem; font-weight: 300; line-height: 1.85; color: rgba(250,250,247,0.55); margin-bottom: 1rem; }
+    .intro-divider { width: 40px; height: 1px; background: rgba(250,250,247,0.2); margin: 2rem 0; }
+    .intro-stats { display: flex; gap: 2.5rem; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--white); line-height: 1; }
+    .stat-label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,247,0.35); margin-top: 0.3rem; }
 
-    .filter-row {
-      display: flex; gap: 0.5rem; margin-top: 1.8rem; flex-wrap: wrap;
-    }
-    .filter-btn {
-      padding: 0.3rem 0.9rem; border-radius: 2px; cursor: pointer;
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      border: 1px solid rgba(250,250,247,0.2); color: rgba(250,250,247,0.5);
-      background: transparent; transition: all 0.2s; font-family: 'Instrument Sans', sans-serif;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: rgba(250,250,247,0.12); color: rgba(250,250,247,0.9);
-      border-color: rgba(250,250,247,0.4);
+    .slideshow-section { position: relative; padding: 0 0 6rem; }
+    .slideshow-wrap {
+      position: relative; width: 100%;
+      aspect-ratio: 16/9; max-height: 88vh;
+      overflow: hidden; background: #0D0C0A;
     }
 
-    /* MAP */
-    .map-wrap {
-      position: sticky; top: 56px; z-index: 100;
-      height: 42vh; min-height: 280px;
-      border-bottom: 2px solid var(--stone-pale);
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 1.4s ease;
+      background-size: cover; background-position: center;
     }
-    #map { width: 100%; height: 100%; }
+    .slide.active { opacity: 1; }
+    .slide-1 { background: radial-gradient(ellipse at 30% 60%, #2C3C28 0%, #0D0C0A 70%); }
+    .slide-2 { background: radial-gradient(ellipse at 70% 40%, #2A2C20 0%, #0D0C0A 70%); }
+    .slide-3 { background: radial-gradient(ellipse at 50% 70%, #1E2C2A 0%, #0D0C0A 70%); }
+    .slide-4 { background: radial-gradient(ellipse at 40% 50%, #2E2818 0%, #0D0C0A 70%); }
+    .slide-5 { background: radial-gradient(ellipse at 60% 40%, #282038 0%, #0D0C0A 70%); }
 
-    /* Override Leaflet popup */
-    .leaflet-popup-content-wrapper {
-      border-radius: 3px; box-shadow: 0 8px 32px rgba(26,23,20,0.18);
-      font-family: 'Instrument Sans', sans-serif; padding: 0; overflow: hidden;
-    }
-    .leaflet-popup-content { margin: 0; width: 200px !important; }
-    .popup-inner { padding: 0.9rem 1rem; }
-    .popup-type { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-light); margin-bottom: 0.3rem; }
-    .popup-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--stone); line-height: 1.2; margin-bottom: 0.2rem; }
-    .popup-loc { font-size: 0.75rem; color: var(--stone-light); }
-    .popup-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--stone-pale); }
-    .leaflet-popup-tip-container { display: none; }
-
-    /* Custom marker */
-    .custom-marker {
-      width: 28px; height: 28px; border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg); border: 2px solid white;
-      box-shadow: 0 2px 8px rgba(26,23,20,0.3);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.2s;
-    }
-    .custom-marker.trail { background: var(--sage); }
-    .custom-marker.wilderness { background: var(--amber); }
-    .custom-marker.pulse {
-      box-shadow: 0 0 0 6px rgba(92,112,96,0.3), 0 2px 8px rgba(26,23,20,0.3);
-    }
-    .custom-marker.pulse.wilderness {
-      box-shadow: 0 0 0 6px rgba(200,132,26,0.3), 0 2px 8px rgba(26,23,20,0.3);
+    .slide-scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to top, rgba(13,12,10,0.78) 0%, rgba(13,12,10,0.08) 45%, transparent 65%);
+      z-index: 2;
     }
 
-    /* ENTRIES */
-    .entries { max-width: 960px; margin: 0 auto; padding: 4rem 4rem 6rem; }
-
-    .entry {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
-      padding: 3rem 0; border-bottom: 1px solid var(--stone-pale);
-      align-items: start; transition: opacity 0.3s;
-      scroll-margin-top: calc(56px + 42vh + 2rem);
+    .slide-caption {
+      position: absolute; bottom: 2.8rem; left: 3.5rem;
+      z-index: 3; max-width: 420px;
     }
-    .entry:last-child { border-bottom: none; }
-    .entry.dimmed { opacity: 0.25; }
-    .entry.highlighted { opacity: 1; }
-
-    .entry:nth-child(even) { direction: rtl; }
-    .entry:nth-child(even) > * { direction: ltr; }
-
-    .entry-images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-    .entry-images.single { grid-template-columns: 1fr; }
-    .entry-img {
-      aspect-ratio: 4/3; overflow: hidden; border-radius: 2px;
-      background: var(--stone-pale);
+    .caption-location {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(250,250,247,0.5); margin-bottom: 0.45rem;
+      transition: opacity 0.35s;
     }
-    .entry-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-    .entry-img:hover img { transform: scale(1.04); }
-    .img-placeholder {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone-light);
-    }
-
-    .entry-body { padding-top: 0.2rem; }
-    .entry-meta { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
-    .entry-type {
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0.2rem 0.6rem; border-radius: 2px;
-    }
-    .entry-type.trail { background: var(--sage-pale); color: var(--sage-dark); }
-    .entry-type.wilderness { background: var(--amber-pale); color: var(--amber); }
-    .entry-year { font-size: 0.75rem; color: var(--stone-light); }
-    .entry-body h3 {
+    .caption-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem; font-weight: 600; line-height: 1.15;
-      letter-spacing: -0.01em; color: var(--stone); margin-bottom: 0.3rem;
+      font-size: 1.35rem; font-weight: 400; font-style: italic;
+      color: rgba(250,250,247,0.88); line-height: 1.35;
+      transition: opacity 0.35s;
     }
-    .entry-location {
-      font-size: 0.8rem; color: var(--stone-light); margin-bottom: 0.9rem;
-      display: flex; align-items: center; gap: 0.35rem;
+    .caption-location.fading, .caption-text.fading { opacity: 0; }
+
+    .globe-wrap {
+      position: absolute; bottom: 1.8rem; right: 2.5rem;
+      z-index: 3; width: 140px; height: 140px;
+      border-radius: 50%; overflow: hidden;
+      border: 1px solid rgba(250,250,247,0.15);
+      background: rgba(13,12,10,0.6);
     }
-    .entry-location::before { content: '↗'; font-size: 0.7rem; }
-    .entry-body p { font-size: 0.9rem; font-weight: 300; line-height: 1.82; color: var(--stone-mid); }
+    #globe-canvas { width: 140px; height: 140px; display: block; }
 
-    .entry-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-    .entry-tag {
-      font-size: 0.68rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--stone-light); border: 1px solid var(--stone-pale);
-      padding: 0.18rem 0.55rem; border-radius: 2px;
+    .slide-dots {
+      position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; gap: 0.5rem;
     }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(250,250,247,0.25); border: none; cursor: pointer; padding: 0; transition: background 0.3s, transform 0.3s; }
+    .dot.active { background: rgba(250,250,247,0.85); transform: scale(1.35); }
 
-    .map-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      margin-top: 1.1rem; font-size: 0.78rem; font-weight: 500;
-      color: var(--sage); text-decoration: none; letter-spacing: 0.04em;
-      border-bottom: 1px solid var(--sage-pale); padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none;
-      cursor: pointer; font-family: 'Instrument Sans', sans-serif;
+    .progress-bar { position: absolute; bottom: 0; left: 0; height: 2px; background: rgba(250,250,247,0.28); z-index: 4; }
+
+    .slide-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 3; background: rgba(13,12,10,0.38); border: 1px solid rgba(250,250,247,0.14);
+      color: rgba(250,250,247,0.6); width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 1.1rem; transition: background 0.2s, color 0.2s;
     }
-    .map-link:hover { color: var(--sage-dark); border-color: var(--sage); }
+    .slide-arrow:hover { background: rgba(13,12,10,0.7); color: var(--white); }
+    .slide-arrow.prev { left: 1.5rem; }
+    .slide-arrow.next { right: 1.5rem; }
 
-    /* FOOTER */
-    footer { padding: 1.8rem 4rem; background: var(--stone); display: flex; justify-content: space-between; align-items: center; }
-    footer p { font-size: 0.78rem; color: rgba(250,250,247,0.35); }
-    footer a { font-size: 0.78rem; color: rgba(250,250,247,0.35); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: rgba(250,250,247,0.8); }
+    footer { padding: 1.8rem 4rem; border-top: 1px solid rgba(250,250,247,0.08); display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.78rem; color: rgba(250,250,247,0.25); }
+    footer a { font-size: 0.78rem; color: rgba(250,250,247,0.25); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: rgba(250,250,247,0.7); }
 
-    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .page-header { padding: 6rem 1.5rem 2.5rem; }
-      .map-wrap { height: 35vh; top: 52px; }
-      .entries { padding: 2.5rem 1.5rem 4rem; }
-      .entry { grid-template-columns: 1fr; gap: 1.2rem; }
-      .entry:nth-child(even) { direction: ltr; }
+      .intro { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+      .slideshow-wrap { aspect-ratio: 3/4; max-height: none; }
+      .slide-caption { left: 1.2rem; bottom: 5rem; max-width: 200px; }
+      .globe-wrap { width: 90px; height: 90px; bottom: 1rem; right: 1rem; }
+      #globe-canvas { width: 90px; height: 90px; }
+      .slide-arrow { display: none; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
     }
   </style>
@@ -237,76 +175,82 @@
   <a href="trails.html" class="active">Trails & Wilderness</a>
 </div>
 
-<header class="page-header">
-  <div class="header-inner">
-    <p class="eyebrow">Trail Building · Wilderness</p>
+<section class="intro">
+  <div class="intro-left fade-up">
+    <p class="intro-eyebrow">Trail Building · Wilderness</p>
     <h1>Moving through<br/><em>wild places.</em></h1>
-    <p>Trail projects, backcountry trips, and the landscapes that keep pulling me back. Both the work of building trails and the act of being out in wilderness.</p>
-    <div class="filter-row">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="trail">Trail Building</button>
-      <button class="filter-btn" data-filter="wilderness">Wilderness Trips</button>
-    </div>
   </div>
-</header>
-
-<!-- STICKY MAP -->
-<div class="map-wrap">
-  <div id="map"></div>
-</div>
-
-<!-- ENTRIES -->
-<section class="entries" id="entries">
-
-  <!-- ENTRY 1 — Trail Building -->
-  <div class="entry fade-up" id="entry-1" data-type="trail" data-lat="59.42177" data-lng="-151.63588">
-    <div class="entry-images">
-      <div class="entry-img">
-        <img src="objects/trail/IMG_2401.jpeg" alt="Rocky Ridge Trail">
+  <div class="intro-right fade-up">
+    <p>Trail projects, backcountry trips, and the landscapes that keep pulling me back — both the work of building trails and the act of being out in wilderness.</p>
+    <p>From the Colorado Front Range to wherever the next season takes me.</p>
+    <!--
+    <div class="intro-divider"></div>
+    <div class="intro-stats">
+      <div>
+        <div class="stat-num">00</div>
+        <div class="stat-label">Trail miles built</div>
       </div>
-      <div class="entry-img">
-        <img src="objects/trail/IMG_2355.jpeg" alt="Mossy Grato">
+      <div>
+        <div class="stat-num">00</div>
+        <div class="stat-label">Wilderness trips</div>
+      </div>
+      <div>
+        <div class="stat-num">00</div>
+        <div class="stat-label">States visited</div>
       </div>
     </div>
-    <div class="entry-body">
-      <div class="entry-meta">
-        <span class="entry-type trail">Trail Building</span>
-        <span class="entry-year">2025</span>
-      </div>
-      <h3>Rocky Ridge Trail</h3>
-      <div class="entry-location">Seldovia, AK</div>
-      <p>Trail maintenance on Rocky Ridge Trail near downtown Seldovia.</p>
-      <button class="map-link" onclick="focusEntry(0)">↗ Show on map</button>
-    </div>
+    -->
   </div>
+</section>
 
-  <!-- ENTRY 2 — Wilderness Trip -->
-  <div class="entry fade-up" id="entry-2" data-type="wilderness" data-lat="40.50" data-lng="-105.68">
-    <div class="entry-images single">
-      <div class="entry-img">
-        <!-- <img src="photos/wild1.jpg" alt="Wilderness camp"> -->
-        <div class="img-placeholder">Photo</div>
-      </div>
+<section class="slideshow-section">
+  <div class="slideshow-wrap">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ADD YOUR SLIDES HERE.
+         For each slide:
+           1. Add  style="background-image: url('your-photo.jpg')"
+           2. Set  data-lat  and  data-lng  (decimal degrees)
+           3. Update  data-location  and  data-caption
+         Add or remove <div class="slide ..."> blocks freely.
+         40.26479, -105.59355
+         37.74221, -107.83665
+    ════════════════════════════════════════════════════════════════════ -->
+    <div class="slide slide-1 active"
+         style="background-image: url('objects/trail/IMG_2401.jpeg')"
+         data-lat="59.43399" data-lng="-151.69064"
+         data-location="Seldovia, AK"
+         data-caption="Maintaining trails near Seldovia"></div>
+
+    <div class="slide slide-2"
+         style="background-image: url('objects/trail/IMG_2764.jpeg')"
+         data-lat="40.26479" data-lng="-105.59355"
+         data-location="Rocky Mountain National Park, CO"
+         data-caption="Backpacking above treeline — leading a trip for Colorado School of Mines Outdoor Rec program."></div>
+
+    <div class="slide slide-3"
+         style="background-image: url('objects/trail/IMG_2656.jpeg')"
+         data-lat="37.74221" data-lng="-107.83665"
+         data-location="San Juan Mountains, CO"
+         data-caption="Backpacking along the Colorado Trail near Rico, CO"></div>
+
+    <div class="slide-scrim"></div>
+
+    <div class="slide-caption">
+      <div class="caption-location" id="cap-location">Seldovia, AK</div>
+      <div class="caption-text" id="cap-text">Maintaining trails near Seldovia</div>
     </div>
-    <div class="entry-body">
-      <div class="entry-meta">
-        <span class="entry-type wilderness">Wilderness Trip</span>
-        <span class="entry-year">2024</span>
-      </div>
-      <h3>Your Wilderness Trip Name</h3>
-      <div class="entry-location">Rocky Mountain National Park, CO</div>
-      <p>Describe the trip — the route, conditions, what you noticed about the landscape. This is a good place to connect what you see in the field to your research interests if relevant.</p>
-      <div class="entry-tags">
-        <span class="entry-tag">Backpacking</span>
-        <span class="entry-tag">Alpine</span>
-        <span class="entry-tag">Solo</span>
-      </div>
-      <button class="map-link" onclick="focusEntry(1)">↗ Show on map</button>
+
+    <div class="globe-wrap">
+      <canvas id="globe-canvas"></canvas>
     </div>
+
+    <div class="slide-dots" id="slide-dots"></div>
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <button class="slide-arrow prev" id="prev-btn" aria-label="Previous slide">&#8592;</button>
+    <button class="slide-arrow next" id="next-btn" aria-label="Next slide">&#8594;</button>
   </div>
-
-
-
 </section>
 
 <footer>
@@ -314,159 +258,193 @@
   <a href="index.html">← Back home</a>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
 <script>
-  // ── MAP SETUP ──
-  const map = L.map('map', {
-    center: [39.2, -105.8],
-    zoom: 7,
-    zoomControl: false,
-    scrollWheelZoom: false
-  });
+const INTERVAL = 6000;
+const slides = Array.from(document.querySelectorAll('.slide'));
+let current = 0, autoTimer, progressAnim;
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap © CARTO',
-    maxZoom: 19
-  }).addTo(map);
+// ── DOTS ──────────────────────────────────────────────────────────────
+const dotsWrap = document.getElementById('slide-dots');
+slides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Slide ' + (i + 1));
+  d.addEventListener('click', () => { goTo(i); resetAuto(); });
+  dotsWrap.appendChild(d);
+});
+const getDots = () => dotsWrap.querySelectorAll('.dot');
 
-  // Labels on top
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19, pane: 'overlayPane'
-  }).addTo(map);
+// ── THREE.JS GLOBE ────────────────────────────────────────────────────
+const canvas = document.getElementById('globe-canvas');
+const SIZE = canvas.offsetWidth || 140;
+canvas.width = SIZE * (window.devicePixelRatio || 1);
+canvas.height = SIZE * (window.devicePixelRatio || 1);
 
-  L.control.zoom({ position: 'topright' }).addTo(map);
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(SIZE, SIZE);
+renderer.setPixelRatio(window.devicePixelRatio || 1);
 
-  // ── COLLECT ENTRIES & BUILD MARKERS ──
-  const entries = document.querySelectorAll('.entry');
-  const markers = [];
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+cam.position.z = 2.5;
 
-  entries.forEach((entry, i) => {
-    const lat = parseFloat(entry.dataset.lat);
-    const lng = parseFloat(entry.dataset.lng);
-    const type = entry.dataset.type;
-    const name = entry.querySelector('h3').textContent;
-    const location = entry.querySelector('.entry-location').textContent.trim();
-    const typeLabel = entry.querySelector('.entry-type').textContent;
+// Sphere
+const globe = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 48, 48),
+  new THREE.MeshPhongMaterial({ color: 0x253028, emissive: 0x0a120c, shininess: 14 })
+);
+scene.add(globe);
 
-    // Custom icon
-    const color = type === 'trail' ? '#5C7060' : '#C8841A';
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        width:26px;height:26px;border-radius:50% 50% 50% 0;
-        transform:rotate(-45deg);
-        background:${color};
-        border:2px solid white;
-        box-shadow:0 2px 8px rgba(26,23,20,0.3);
-        transition:box-shadow 0.2s;
-      "></div>`,
-      iconSize: [26, 26],
-      iconAnchor: [13, 26],
-      popupAnchor: [0, -28]
-    });
+// Lat/lon grid
+scene.add(new THREE.Mesh(
+  new THREE.SphereGeometry(1.005, 18, 12),
+  new THREE.MeshBasicMaterial({ color: 0x4a7055, wireframe: true, opacity: 0.16, transparent: true })
+));
 
-    const marker = L.marker([lat, lng], { icon }).addTo(map);
+// Atmosphere
+scene.add(new THREE.Mesh(
+  new THREE.SphereGeometry(1.09, 32, 32),
+  new THREE.MeshBasicMaterial({ color: 0x70bb88, opacity: 0.06, transparent: true, side: THREE.BackSide })
+));
 
-    const popup = L.popup({ closeButton: false, offset: [0, 0] }).setContent(`
-      <div class="popup-inner">
-        <div class="popup-type">${typeLabel}</div>
-        <div class="popup-name">${name}</div>
-        <div class="popup-loc">${location}</div>
-      </div>
-    `);
-    marker.bindPopup(popup);
+// Location marker dot
+const locDot = new THREE.Mesh(
+  new THREE.SphereGeometry(0.048, 12, 12),
+  new THREE.MeshBasicMaterial({ color: 0xd4a85a })
+);
+scene.add(locDot);
 
-    marker.on('click', () => {
-      scrollToEntry(i);
-      highlightEntry(i);
-    });
+// Pulse ring
+const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4a85a, opacity: 0.5, transparent: true, side: THREE.DoubleSide });
+const locRing = new THREE.Mesh(new THREE.RingGeometry(0.058, 0.08, 24), ringMat);
+scene.add(locRing);
 
-    markers.push(marker);
-  });
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const sun = new THREE.DirectionalLight(0xffffff, 0.95);
+sun.position.set(3, 2, 3);
+scene.add(sun);
 
-  // ── FOCUS FUNCTIONS ──
-  function focusEntry(i) {
-    const lat = parseFloat(entries[i].dataset.lat);
-    const lng = parseFloat(entries[i].dataset.lng);
-    map.flyTo([lat, lng], 10, { duration: 1 });
-    markers[i].openPopup();
-    highlightEntry(i);
-    // Scroll map into view
-    document.querySelector('.map-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+// Convert lat/lng → unit sphere position
+function ll2v(lat, lng) {
+  const phi = (90 - lat) * Math.PI / 180;
+  const theta = (lng + 180) * Math.PI / 180;
+  return new THREE.Vector3(
+    -Math.sin(phi) * Math.cos(theta),
+     Math.cos(phi),
+     Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+// Globe rotation: we rotate the globe so the current location faces camera (+Z)
+let quatCurrent = new THREE.Quaternion();
+let quatTarget  = new THREE.Quaternion();
+let spinning = false;
+let pulse = 0;
+
+function setTarget(lat, lng) {
+  const dir = ll2v(lat, lng).normalize();
+  quatTarget.setFromUnitVectors(dir, new THREE.Vector3(0, 0, 1));
+  spinning = true;
+}
+
+// Initialise to first slide
+setTarget(+slides[0].dataset.lat, +slides[0].dataset.lng);
+quatCurrent.copy(quatTarget);
+spinning = false;
+
+function renderLoop() {
+  requestAnimationFrame(renderLoop);
+  pulse += 0.04;
+
+  // Slerp toward target or idle drift
+  if (spinning) {
+    quatCurrent.slerp(quatTarget, 0.045);
+    if (quatCurrent.angleTo(quatTarget) < 0.003) spinning = false;
+  } else {
+    const drift = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), 0.0007);
+    quatCurrent.multiply(drift);
   }
 
-  function scrollToEntry(i) {
-    setTimeout(() => {
-      entries[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 400);
-  }
+  globe.quaternion.copy(quatCurrent);
 
-  function highlightEntry(i) {
-    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-    entries.forEach((e, j) => {
-      if (activeFilter !== 'all' && e.dataset.type !== activeFilter) return;
-      e.classList.toggle('highlighted', j === i);
-      e.classList.toggle('dimmed', j !== i);
-    });
-    setTimeout(() => {
-      entries.forEach(e => { e.classList.remove('highlighted', 'dimmed'); });
-    }, 2500);
-  }
+  // Position dot: take local sphere position, rotate by globe's quaternion
+  const sl = slides[current];
+  const localPos = ll2v(+sl.dataset.lat, +sl.dataset.lng).multiplyScalar(1.025);
+  const worldPos = localPos.clone().applyQuaternion(quatCurrent);
+  locDot.position.copy(worldPos);
+  locRing.position.copy(worldPos);
+  locRing.lookAt(worldPos.clone().multiplyScalar(2));
 
-  // ── FILTER ──
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      entries.forEach((entry, i) => {
-        const show = filter === 'all' || entry.dataset.type === filter;
-        entry.style.display = show ? '' : 'none';
-        if (show) markers[i]._icon.style.opacity = '1';
-        else markers[i]._icon.style.opacity = '0.2';
-      });
-    });
+  // Pulse ring
+  const s = 1 + 0.28 * Math.abs(Math.sin(pulse));
+  locRing.scale.setScalar(s);
+  ringMat.opacity = 0.55 * (0.5 + 0.5 * Math.sin(pulse));
+
+  renderer.render(scene, cam);
+}
+renderLoop();
+
+// ── SLIDESHOW ─────────────────────────────────────────────────────────
+const capLoc  = document.getElementById('cap-location');
+const capTxt  = document.getElementById('cap-text');
+const progBar = document.getElementById('progress-bar');
+
+function goTo(idx) {
+  slides[current].classList.remove('active');
+  getDots()[current].classList.remove('active');
+  current = (idx + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  getDots()[current].classList.add('active');
+
+  capLoc.classList.add('fading');
+  capTxt.classList.add('fading');
+  setTimeout(() => {
+    capLoc.textContent = slides[current].dataset.location || '';
+    capTxt.textContent = slides[current].dataset.caption  || '';
+    capLoc.classList.remove('fading');
+    capTxt.classList.remove('fading');
+  }, 320);
+
+  setTarget(+slides[current].dataset.lat, +slides[current].dataset.lng);
+}
+
+function startProgress() {
+  progBar.style.transition = 'none';
+  progBar.style.width = '0%';
+  requestAnimationFrame(() => {
+    progBar.style.transition = `width ${INTERVAL}ms linear`;
+    progBar.style.width = '100%';
   });
+}
 
-  // ── SCROLL SPY: highlight marker when entry is in view ──
-  const mapHeight = () => document.querySelector('.map-wrap').offsetHeight;
-  const navHeight = () => document.querySelector('nav').offsetHeight;
+function resetAuto() {
+  clearInterval(autoTimer);
+  startProgress();
+  autoTimer = setInterval(() => { goTo(current + 1); startProgress(); }, INTERVAL);
+}
 
-  const scrollObs = new IntersectionObserver(entries_ => {
-    entries_.forEach(obs => {
-      if (obs.isIntersecting) {
-        const idx = Array.from(entries).indexOf(obs.target);
-        if (idx >= 0) {
-          markers[idx].openPopup();
-        }
-      }
-    });
-  }, {
-    threshold: 0.5,
-    rootMargin: `-${56 + 42}% 0px -40% 0px`
-  });
-  entries.forEach(e => scrollObs.observe(e));
+resetAuto();
 
-  // ── FADE UP ──
-  const obs = new IntersectionObserver(entries_ => {
-    entries_.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+document.getElementById('prev-btn').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+document.getElementById('next-btn').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
-  // ── HAMBURGER ──
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
+// ── FADE UP ───────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(es => {
+  es.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 120); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── HAMBURGER ─────────────────────────────────────────────────────────
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
 </script>
 </body>
 </html>
