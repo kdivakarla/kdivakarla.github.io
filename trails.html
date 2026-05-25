@@ -63,8 +63,11 @@
     .slideshow-section { position: relative; padding: 0 0 6rem; }
     .slideshow-wrap {
       position: relative; width: 100%;
-      aspect-ratio: 16/9; max-height: 88vh;
+      height: clamp(340px, 90vw, 88vh);
       overflow: hidden; background: #0D0C0A;
+    }
+    @media (orientation: landscape) {
+      .slideshow-wrap { height: 85vh; }
     }
 
     .slide {
@@ -144,7 +147,6 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .intro { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
-      .slideshow-wrap { aspect-ratio: 3/4; max-height: none; }
       .slide-caption { left: 1.2rem; bottom: 5rem; max-width: 200px; }
       .globe-wrap { width: 90px; height: 90px; bottom: 1rem; right: 1rem; }
       #globe-canvas { width: 90px; height: 90px; }
@@ -198,8 +200,7 @@
         <div class="stat-num">00</div>
         <div class="stat-label">States visited</div>
       </div>
-    </div>
-    -->
+    </div> -->
   </div>
 </section>
 
@@ -213,32 +214,31 @@
            2. Set  data-lat  and  data-lng  (decimal degrees)
            3. Update  data-location  and  data-caption
          Add or remove <div class="slide ..."> blocks freely.
-         40.26479, -105.59355
-         37.74221, -107.83665
+          59.39753, -151.50267
     ════════════════════════════════════════════════════════════════════ -->
     <div class="slide slide-1 active"
-         style="background-image: url('objects/trail/IMG_2401.jpeg')"
-         data-lat="59.43399" data-lng="-151.69064"
-         data-location="Seldovia, AK"
-         data-caption="Maintaining trails near Seldovia"></div>
-
-    <div class="slide slide-2"
          style="background-image: url('objects/trail/IMG_2764.jpeg')"
-         data-lat="40.26479" data-lng="-105.59355"
+         data-lat="40.50" data-lng="-105.68"
          data-location="Rocky Mountain National Park, CO"
-         data-caption="Backpacking above treeline — leading a trip for Colorado School of Mines Outdoor Rec program."></div>
+         data-caption="Leading a backpacking trip near Longs Peak"></div>
 
     <div class="slide slide-3"
-         style="background-image: url('objects/trail/IMG_2656.jpeg')"
-         data-lat="37.74221" data-lng="-107.83665"
+         style="background-image: url('objects/trail/IMG_2656.jpeg')" 
+         data-lat="37.74" data-lng="-107.68"
          data-location="San Juan Mountains, CO"
          data-caption="Backpacking along the Colorado Trail near Rico, CO"></div>
+
+    <div class="slide slide-4"
+         style="background-image: url('objects/trail/IMG_2428.jpeg')" 
+         data-lat="59.39753" data-lng="-151.50267"
+         data-location="Seldovia, AK"
+         data-caption="View from a trail building site near Red Mountain"></div>
 
     <div class="slide-scrim"></div>
 
     <div class="slide-caption">
-      <div class="caption-location" id="cap-location">Seldovia, AK</div>
-      <div class="caption-text" id="cap-text">Maintaining trails near Seldovia</div>
+      <div class="caption-location" id="cap-location">Rocky Mountain National Park, CO</div>
+      <div class="caption-text" id="cap-text">Leading a backpacking trip near Longs Peak</div>
     </div>
 
     <div class="globe-wrap">
@@ -289,18 +289,18 @@ const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
 cam.position.z = 2.5;
 
-// Sphere
+// Earth texture from NASA/unpkg
+const texLoader = new THREE.TextureLoader();
+const earthTex = texLoader.load(
+  'https://unpkg.com/three-globe/example/img/earth-dark.jpg'
+);
+
+// Sphere with Earth texture
 const globe = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 48, 48),
-  new THREE.MeshPhongMaterial({ color: 0x253028, emissive: 0x0a120c, shininess: 14 })
+  new THREE.SphereGeometry(1, 64, 64),
+  new THREE.MeshPhongMaterial({ map: earthTex, shininess: 10 })
 );
 scene.add(globe);
-
-// Lat/lon grid
-scene.add(new THREE.Mesh(
-  new THREE.SphereGeometry(1.005, 18, 12),
-  new THREE.MeshBasicMaterial({ color: 0x4a7055, wireframe: true, opacity: 0.16, transparent: true })
-));
 
 // Atmosphere
 scene.add(new THREE.Mesh(
