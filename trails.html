@@ -18,46 +18,46 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Instrument Sans', sans-serif; background: var(--stone); color: var(--white); overflow-x: hidden; }
+    body { font-family: 'Instrument Sans', sans-serif; background: var(--white); color: var(--stone); overflow-x: hidden; }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.1rem 3rem;
-      background: rgba(26,23,20,0.88); backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(250,250,247,0.07);
+      background: rgba(250,250,247,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--stone-pale);
     }
-    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: -0.01em; }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--stone); text-decoration: none; letter-spacing: -0.01em; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,247,0.4); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--stone); }
     .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: transform 0.3s, opacity 0.3s; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--stone); transition: transform 0.3s, opacity 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; background: var(--stone); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; background: var(--white); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: var(--white); text-decoration: none; }
-    .mobile-menu a.active { color: #A8C8A0; }
+    .mobile-menu a { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: var(--stone); text-decoration: none; }
+    .mobile-menu a.active { color: var(--sage); }
 
     /* INTRO */
     .intro {
       min-height: 55vh; display: flex; flex-direction: column; justify-content: flex-end;
       padding: 9rem 4rem 5rem;
-      border-bottom: 1px solid rgba(250,250,247,0.07);
+      border-bottom: 1px solid var(--stone-pale);
     }
     .intro-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end; }
-    .intro-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(250,250,247,0.3); margin-bottom: 1.1rem; }
-    .intro h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.0; letter-spacing: -0.025em; color: var(--white); }
-    .intro h1 em { font-style: italic; color: #A8C8A0; }
-    .intro-desc p { font-size: 0.97rem; font-weight: 300; line-height: 1.88; color: rgba(250,250,247,0.5); margin-bottom: 0.8rem; }
+    .intro-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--stone-light); margin-bottom: 1.1rem; }
+    .intro h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.0; letter-spacing: -0.025em; color: var(--stone); }
+    .intro h1 em { font-style: italic; color: var(--sage); }
+    .intro-desc p { font-size: 0.97rem; font-weight: 300; line-height: 1.88; color: var(--stone-light); margin-bottom: 0.8rem; }
 
     /* REGION SECTION */
     .region {
       padding: 6rem 4rem;
-      border-bottom: 1px solid rgba(250,250,247,0.07);
+      border-bottom: 1px solid var(--stone-pale);
     }
     .region-inner { max-width: 1200px; margin: 0 auto; }
 
@@ -65,10 +65,10 @@
       display: flex; align-items: baseline; gap: 1.5rem;
       margin-bottom: 3rem; flex-wrap: wrap;
     }
-    .region-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 400; color: rgba(250,250,247,0.2); letter-spacing: 0.1em; }
-    .region-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; letter-spacing: -0.02em; color: var(--white); line-height: 1; }
-    .region-title em { font-style: italic; color: #A8C8A0; }
-    .region-type { margin-left: auto; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,250,247,0.28); }
+    .region-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 400; color: var(--stone-light); letter-spacing: 0.1em; }
+    .region-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; letter-spacing: -0.02em; color: var(--stone); line-height: 1; }
+    .region-title em { font-style: italic; color: var(--sage); }
+    .region-type { margin-left: auto; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone-light); }
 
     .region-body {
       display: grid;
@@ -97,7 +97,7 @@
 
     .photo {
       overflow: hidden; border-radius: 2px;
-      background: rgba(255,255,255,0.04);
+      background: var(--stone-pale);
       position: relative; cursor: zoom-in;
     }
     .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s ease; }
@@ -109,40 +109,40 @@
       width: 100%; height: 100%; min-height: 140px;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(250,250,247,0.18);
+      color: var(--stone-light);
     }
 
     /* GLOBE SIDEBAR */
     .region-sidebar { position: sticky; top: 6rem; display: flex; flex-direction: column; gap: 0; }
 
     .globe-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(250,250,247,0.08);
+      background: #F5F2EC;
+      border: 1px solid var(--stone-pale);
       border-radius: 4px; overflow: hidden;
       padding: 1.4rem;
       display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
     }
-    .globe-container { width: 180px; height: 180px; border-radius: 50%; overflow: hidden; border: 1px solid rgba(250,250,247,0.1); flex-shrink: 0; }
+    .globe-container { width: 180px; height: 180px; border-radius: 50%; overflow: hidden; border: 1px solid var(--stone-pale); flex-shrink: 0; }
     .globe-container canvas { width: 180px !important; height: 180px !important; display: block; }
 
     .region-meta { width: 100%; }
-    .meta-place { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; line-height: 1.2; }
-    .meta-coords { font-size: 0.66rem; font-weight: 400; letter-spacing: 0.1em; color: rgba(250,250,247,0.25); font-variant-numeric: tabular-nums; margin-bottom: 0.9rem; }
-    .meta-desc { font-size: 0.82rem; font-weight: 300; line-height: 1.75; color: rgba(250,250,247,0.45); }
+    .meta-place { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--stone); margin-bottom: 0.25rem; line-height: 1.2; }
+    .meta-coords { font-size: 0.66rem; font-weight: 400; letter-spacing: 0.1em; color: var(--stone-light); font-variant-numeric: tabular-nums; margin-bottom: 0.9rem; }
+    .meta-desc { font-size: 0.82rem; font-weight: 300; line-height: 1.75; color: var(--stone-mid); }
     .meta-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.9rem; }
-    .meta-tag { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.16rem 0.5rem; border-radius: 2px; background: rgba(255,255,255,0.04); color: rgba(250,250,247,0.35); border: 1px solid rgba(250,250,247,0.07); }
+    .meta-tag { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.16rem 0.5rem; border-radius: 2px; background: var(--white); color: var(--stone-light); border: 1px solid var(--stone-pale); }
 
     /* LIGHTBOX */
-    .lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(13,12,10,0.95); align-items: center; justify-content: center; }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(245,242,236,0.96); align-items: center; justify-content: center; }
     .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 2px; }
-    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: rgba(250,250,247,0.5); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
-    .lightbox-close:hover { color: var(--white); }
+    .lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 2px; box-shadow: 0 8px 40px rgba(26,23,20,0.15); }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--stone-light); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .lightbox-close:hover { color: var(--stone); }
 
-    footer { padding: 2rem 4rem; border-top: 1px solid rgba(250,250,247,0.07); display: flex; justify-content: space-between; align-items: center; }
-    footer p { font-size: 0.78rem; color: rgba(250,250,247,0.22); }
-    footer a { font-size: 0.78rem; color: rgba(250,250,247,0.22); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: rgba(250,250,247,0.7); }
+    footer { padding: 2rem 4rem; border-top: 1px solid var(--stone-pale); display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.78rem; color: var(--stone-light); }
+    footer a { font-size: 0.78rem; color: var(--stone-light); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--stone); }
 
     .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.75s ease, transform 0.75s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -223,10 +223,10 @@
           <img src="objects/trail/AK/redmtn_portrait.jpeg" alt="View from Red Mountain trail building site">
         </div>
         <!-- Photos 2 & 3: stacked in right col -->
-        <div class="photo port">
+        <div class="photo land">
           <img src="objects/trail/AK/Tutka_Bay.jpeg" alt="Looking southeast towards Tutka Bay">
         </div>
-        <div class="photo port">
+        <div class="photo land">
           <img src="objects/trail/AK/lupine_redmtn.jpeg" alt="Frosty lupine near Red Mountain">
         </div>
         <!-- To add more photos, change collage-3 to collage-5 above
@@ -264,13 +264,13 @@
   <div class="region-inner">
     <div class="region-header">
       <span class="region-num">02</span>
-      <h2 class="region-title"><em>Colorado</em> RMNP & San Juans</h2>
+      <h2 class="region-title"><em>Colorado</em> Front Range<br/>& San Juans</h2>
       <span class="region-type">Backpacking · Colorado Trail</span>
     </div>
     <div class="region-body">
 
       <div class="collage collage-2">
-        <div class="photo port">
+        <div class="photo land">
           <img src="objects/trail/CO/rmnp_longs.jpeg" alt="Leading a backpacking trip near Longs Peak, RMNP">
         </div>
         <div class="photo land">
@@ -388,11 +388,9 @@ function buildGlobe(canvas) {
     if (!visible) return;
     pulse += 0.033;
 
-    // Slow idle drift
-    qBase.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), 0.0005));
     globe.quaternion.copy(qBase);
 
-    // Keep dot fixed on the location as globe rotates
+    // Keep dot fixed on the location
     const localPos = ll2v(lat, lng, 1.03);
     const worldPos = localPos.clone().applyQuaternion(qBase);
     dot.position.copy(worldPos);
