@@ -241,8 +241,7 @@
           <div class="region-meta">
             <div class="meta-place">Seldovia, AK</div>
             <div class="meta-coords">59.4°N · 151.7°W</div>
-            <div class="meta-desc">Remote coastal community on the southern Kenai Peninsula. Trail building in old-growth spruce and along cliff-edge routes — Tutka Backdoor Trail and Red Mountain.</div>
-            </div>
+            <div class="meta-desc">Remote coastal community on the southern Kenai Peninsula. Trail building in old-growth spruce and along cliff-edge routes — Tutka Backdoor Trail, part of my lifestyle internship with Hig and Ground Truth Alaska.</div>
           </div>
         </div>
       </div>
@@ -265,14 +264,19 @@
     </div>
     <div class="region-body">
 
-      <div class="collage collage-2">
+      <div class="collage collage-4">
         <div class="photo port">
           <img src="objects/trail/CO/rmnp_longs.jpeg" alt="Leading a backpacking trip near Longs Peak, RMNP">
         </div>
         <div class="photo land">
           <img src="objects/trail/CO/rico_sunrise_landscape.jpeg" alt="Sunrise on the Colorado Trail near Rico, CO">
         </div>
-        <!-- Add more CO photos here — change collage-2 to collage-4 or collage-5 -->
+        <div class="photo port">
+          <img src="objects/trail/CO/alpine_aster_port.jpeg" alt="Alpine Aster on the CT">
+        </div>
+        <div class="photo port">
+          <img src="objects/trail/CO/cascade_creek_port.jpeg" alt="Cascade creek in Southwest Colorado on the CT">
+        </div>
       </div>
 
       <div class="region-sidebar">
@@ -284,8 +288,7 @@
           <div class="region-meta">
             <div class="meta-place">Colorado, USA</div>
             <div class="meta-coords">39.1°N · 106.5°W</div>
-            <div class="meta-desc">Backpacking in Rocky Mountain National Park near Longs Peak, and along the Colorado Trail through the San Juan Mountains near Rico.</div>
-            </div>
+            <div class="meta-desc">Backpacking in Rocky Mountain National Park, and along the Colorado Trail.</div>
           </div>
         </div>
       </div>
@@ -299,35 +302,37 @@
     <div class="region-header">
       <span class="region-num">03</span>
       <h2 class="region-title">Galapagos Islands, <em>Ecuador</em></h2>
-      <span class="region-type">Adventure</span>
+      <span class="region-type">Trail Building</span>
     </div>
     <div class="region-body">
 
-      <div class="collage collage-4">
+      <div class="collage collage-3">
+        <!-- Photo 1: spans full left col, 2 rows tall -->
+        <div class="photo port">
+          <img src="objects/trail/Ecuador/bfb_port.jpeg" alt="Blue Footed Boobie">
+        </div>
+        <div class="photo port">
+          <img src="objects/trail/Ecuador/tort_port.jpeg" alt="Tortoise">
+        </div>
+        <div class="photo land">
+          <img src="objects/trail/Ecuador/flamingo_land.jpeg" alt="Flamingos in a pond">
+        </div>
         <div class="photo land">
           <img src="objects/trail/Ecuador/sunset_land.jpeg" alt="Sunset on Isabella Island">
         </div>
-        <div class="photo port">
-          <img src="oobjects/trail/Ecuador/tort_port.jpeg" alt="Old Tortoise">
-        </div>
-        <div class="photo port">
-          <img src="objects/trail/Ecuador/bfb_port.jpeg" alt="Blue Footed Boobies">
-        </div>
-        <div class="photo land">
-          <img src="objects/trail/Ecuador/flamingo_land.jpeg" alt="Flamingos">
-        </div>
+        <!-- To add more photos, change collage-3 to collage-5 above
+             and add more .photo blocks here -->
       </div>
 
       <div class="region-sidebar">
         <div class="globe-card">
           <div class="globe-container">
-            <canvas class="globe-canvas" data-lat="-0.82326" data-lng="-89.50802"></canvas>
+            <canvas class="globe-canvas" data-lat="-0.85836" data-lng="-89.52162"></canvas>
           </div>
           <div class="region-meta">
-            <div class="meta-place">Galapagos Islands, Ecuador</div>
-            <div class="meta-coords">0.82°S · 89.51°W</div>
-            <div class="meta-desc">College orientation trip to the Galapgos Islands. Taking in the beautiful flora and fauna, along with beuatiful geologic features.</div>
-            </div>
+            <div class="meta-place">Galapgos Islands</div>
+            <div class="meta-coords">0.86°S · 89.52°W</div>
+            <div class="meta-desc">College trip to explore the beautiful flora, fauna and geology of the Galapagos Islands.</div>
           </div>
         </div>
       </div>
@@ -354,7 +359,7 @@
 <script>
 // ── GLOBE FACTORY ──────────────────────────────────────────────────────
 const texLoader = new THREE.TextureLoader();
-const earthTex  = texLoader.load('https://unpkg.com/three-globe/example/img/earth-dark.jpg');
+const earthTex  = texLoader.load('https://unpkg.com/three-globe/example/img/earth-day.jpg');
 
 function buildGlobe(canvas) {
   const lat  = +canvas.dataset.lat;
@@ -384,13 +389,13 @@ function buildGlobe(canvas) {
   ));
 
   const dot = new THREE.Mesh(
-    new THREE.SphereGeometry(0.052, 12, 12),
+    new THREE.SphereGeometry(0.028, 12, 12),
     new THREE.MeshBasicMaterial({ color: 0xd4a85a })
   );
   scene.add(dot);
 
   const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4a85a, opacity: 0.5, transparent: true, side: THREE.DoubleSide });
-  const ring    = new THREE.Mesh(new THREE.RingGeometry(0.062, 0.086, 28), ringMat);
+  const ring    = new THREE.Mesh(new THREE.RingGeometry(0.036, 0.052, 28), ringMat);
   scene.add(ring);
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.5));
