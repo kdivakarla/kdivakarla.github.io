@@ -88,11 +88,11 @@
     .collage-3 .photo:first-child { grid-row: 1 / 3; }
 
     /* 4 photos: big top-left, portrait top-right, two landscape bottom */
-    .collage-4 { grid-template-columns: 3fr 2fr; grid-template-rows: auto auto; }
+    .collage-4 { grid-template-columns: 3fr 2fr; grid-template-rows: 1fr 1fr; }
     .collage-4 .photo:first-child { grid-row: 1 / 2; }
 
     /* 5 photos: 2 top, 3 bottom — first photo spans 2 cols on top row */
-    .collage-5 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; }
+    .collage-5 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
     .collage-5 .photo:nth-child(1) { grid-column: 1 / 3; }
 
     .photo {
@@ -160,8 +160,8 @@
       .intro-inner { grid-template-columns: 1fr; gap: 2rem; }
       .region { padding: 4rem 1.5rem; }
       .region-type { margin-left: 0; }
-      .collage-3, .collage-5 { grid-template-columns: 1fr 1fr; }
-      .collage-3 .photo:first-child, .collage-5 .photo:nth-child(1) { grid-column: auto; grid-row: auto; }
+      .collage-3, .collage-4, .collage-5 { grid-template-columns: 1fr 1fr; }
+      .collage-3 .photo:first-child, .collage-4 .photo:first-child, .collage-5 .photo:nth-child(1) { grid-column: auto; grid-row: auto; }
       .globe-card { flex-direction: column; align-items: center; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
     }
@@ -378,10 +378,6 @@
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     REGION 2 — COLORADO
-════════════════════════════════════════════════════════════ -->
 <section class="region fade-up">
   <div class="region-inner">
     <div class="region-header">
@@ -393,21 +389,11 @@
 
       
       <div class="collage collage-5">
-        <div class="photo port">
-          <img src="objects/trail/CO/rmnp_longs.jpeg" alt="Leading a backpacking trip near Longs Peak, RMNP">
-        </div>
-        <div class="photo port">
-          <img src="objects/trail/CO/alpine_aster_port.jpeg" alt="Alpine Aster on the CT">
-        </div>
-        <div class="photo port">
-          <img src="objects/trail/CO/cascade_creek_port.jpeg" alt="Cascade creek in Southwest Colorado on the CT">
-        </div>
-        <div class="photo port">
-          <img src="objects/trail/CO/berthoud_port.jpeg" alt="Touring on Berthoud Pass with friends">
-        </div>
-        <div class="photo land">
-          <img src="objects/trail/CO/rico_sunrise_landscape.jpeg" alt="Sunrise on the Colorado Trail near Rico, CO">
-        </div>
+        <div class="photo land"><img src="objects/trail/CO/rico_sunrise_landscape.jpeg" alt="Sunrise on the Colorado Trail near Rico, CO"></div>
+        <div class="photo port"><img src="objects/trail/CO/alpine_aster_port.jpeg" alt="Alpine Aster on the CT"></div>
+        <div class="photo port"><img src="objects/trail/CO/cascade_creek_port.jpeg" alt="Cascade creek in Southwest Colorado on the CT"></div>
+        <div class="photo port"><img src="objects/trail/CO/berthoud_port.jpeg" alt="Touring on Berthoud Pass with friends"></div>
+        <div class="photo port"><img src="objects/trail/CO/rmnp_longs.jpeg" alt="Leading a backpacking trip near Longs Peak, RMNP"></div>
       </div>
 
       <div class="region-sidebar">
@@ -436,20 +422,12 @@
       <span class="region-type">Adventure</span>
     </div>
     <div class="region-body">
-
       <div class="collage collage-4">
-        <div class="photo port">
-          <img src="objects/trail/Ecuador/tort_port.jpeg" alt="Tortoise">
-        </div>
-        <div class="photo port">
-          <img src="objects/trail/Ecuador/bfb_port.jpeg" alt="Blue Footed Boobie">
-        </div>
-        <div class="photo land">
-          <img src="objects/trail/Ecuador/sunset_land.jpeg" alt="Sunset on Isabella Island">
-        </div>
-        <div class="photo land">
-          <img src="objects/trail/Ecuador/flamingo_land.jpeg" alt="Flamingos in a pond">
-        </div>
+        <div class="photo land"><img src="objects/trail/Ecuador/sunset_land.jpeg" alt="Sunset on Isabella Island"></div>
+        <div class="photo port"><img src="objects/trail/Ecuador/tort_port.jpeg" alt="Tortoise"></div>
+        <div class="photo land"><img src="objects/trail/Ecuador/flamingo_land.jpeg" alt="Flamingos in a pond"></div>
+        <div class="photo port"><img src="objects/trail/Ecuador/bfb_port.jpeg" alt="Blue Footed Boobie"></div>
+      </div>
         <!-- To add more photos, change collage-3 to collage-5 above
              and add more .photo blocks here -->
       </div>
